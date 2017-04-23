@@ -54,7 +54,15 @@
                     @RenderBody()
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12">
-                    @RenderPage("~/Views/Shared/Templates/_Left.cshtml")
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>Tài khoản</h4>
+                            <hr>
+                        </div><!-- end widget-title -->
+                        <div class="mini-widget carrier-widget m30" style="text-align: center">
+                            @RenderPage("~/Views/Shared/_LoginPartial.cshtml")
+                        </div><!-- end social -->
+                    </div>
                 </div>
             </div><!-- end row -->
         </div><!-- end container -->

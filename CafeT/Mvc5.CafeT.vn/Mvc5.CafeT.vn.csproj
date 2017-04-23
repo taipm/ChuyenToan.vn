@@ -750,6 +750,8 @@
     <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Templates\Techmag\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="AppSettings.config" />
+    <Content Include="ConnectionStrings.config" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1363,7 +1365,7 @@
     <Content Include="Views\Shared\Templates\_Menu.cshtml" />
     <Content Include="Views\Shared\Templates\_Slide.cshtml" />
     <Content Include="Views\Shared\Templates\_Top.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml.bak" />
     <Content Include="Views\Shared\_Articles-Box.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Shared\Templates\_Left-Follow.cshtml" />

@@ -1,6 +1,19 @@
 ﻿
 @{
     ViewBag.Title = "Liên hệ";
+
+    double latLocation = double.Parse(System.Configuration.ConfigurationManager.AppSettings["LatLocation"]);
+    double lngLocation = double.Parse(System.Configuration.ConfigurationManager.AppSettings["LngLocation"]);
+    string mapsApiKey = System.Configuration.ConfigurationManager.AppSettings["MapsApiKey"];
+    string urlMaps = "https://maps.googleapis.com/maps/api/js?key=" + mapsApiKey + "&callback=initMap";
+
+    string linkFacebook = System.Configuration.ConfigurationManager.AppSettings["LinkFacebook"];
+    string linkTwitter = System.Configuration.ConfigurationManager.AppSettings["LinkTwitter"];
+    string linkPinterest = System.Configuration.ConfigurationManager.AppSettings["LinkPinterest"];
+    string linkGooglePlus = System.Configuration.ConfigurationManager.AppSettings["LinkGooglePlus"];
+    string linkVimeo = System.Configuration.ConfigurationManager.AppSettings["LinkVimeo"];
+    string linkYouTube = System.Configuration.ConfigurationManager.AppSettings["LinkYouTube"];
+    string linkMaxCDN = System.Configuration.ConfigurationManager.AppSettings["LinkMaxCDN"];
 }
 
 <div class="col-md-12">
@@ -42,13 +55,13 @@
         <div class="links-widget darkcolor m30">
             <div class="post-review col-md-12 col-sm-12 col-xs-12">
                 <ul class="sociallinks">
-                    <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fa fa-pinterest"></i> Pinterest</a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i> Google Plus</a></li>
-                    <li><a href="#"><i class="fa fa-vimeo"></i> Vimeo</a></li>
-                    <li><a href="#"><i class="fa fa-youtube"></i> YouTube</a></li>
-                    <li><a href="#"><i class="fa fa-maxcdn"></i> MaxCDN</a></li>
+                    <li><a href="@linkFacebook"><i class="fa fa-facebook"></i> Facebook</a></li>
+                    <li><a href="@linkTwitter"><i class="fa fa-twitter"></i> Twitter</a></li>
+                    <li><a href="@linkPinterest"><i class="fa fa-pinterest"></i> Pinterest</a></li>
+                    <li><a href="@linkGooglePlus"><i class="fa fa-google-plus"></i> Google Plus</a></li>
+                    <li><a href="@linkVimeo"><i class="fa fa-vimeo"></i> Vimeo</a></li>
+                    <li><a href="@linkYouTube"><i class="fa fa-youtube"></i> YouTube</a></li>
+                    <li><a href="@linkMaxCDN"><i class="fa fa-maxcdn"></i> MaxCDN</a></li>
                 </ul>
             </div>
         </div>
@@ -96,7 +109,7 @@
 <!-- CUSTOM PLUGINS -->
 <script>
     var marker;
-    var myLatLng = { lat: 10.793099863989733, lng: 106.65770172271914 };
+    var myLatLng = { lat: @latLocation, lng: @lngLocation };
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -121,4 +134,4 @@
         }
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoouu1c7v89T1YLdwcOj_IuhV4szq3TqA&callback=initMap" async defer></script>
+<script src="@urlMaps" async defer></script>
