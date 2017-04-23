@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.AnswerReviewModel>
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            <header>
+                <h4>
+                    @Html.Raw("Review by:" + item.ReviewBy)
+                    @Html.Raw("Lúc: " + item.ReviewDate)
+                </h4>
+                <hr />
+            </header>
+            @Html.Raw("Điểm: " + item.Marks) @Html.Raw(" | ")
+            @Html.Raw("Đánh giá: " + item.IsCorrect)
+            @if (!item.Content.IsNullOrEmptyOrWhiteSpace())
+            {
+                <p>
+                    @Html.Raw("Nhận xét <br />" + item.Content)
+                </p>
+            }
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", "AnswerReviewModels", new { id = item.Id }, null) |
+                    @Html.ActionLink("Details", "Details", "AnswerReviewModels", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "AnswerReviewModels", new { id = item.Id }, null)
+                </p>
+            }
+            
+           
+        </li>
+    }
+</ul>
+

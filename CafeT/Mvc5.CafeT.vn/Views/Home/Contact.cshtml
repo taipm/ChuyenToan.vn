@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Liên hệ";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Bản đồ</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                <div id="map"></div>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<div class="col-md-8 col-sm-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Thông tin chi tiết</h4>
+            <hr>
+        </div>
+        <!-- end widget-title -->
+        <div class="links-widget m30">
+            <p>ChuyenToan.vn - được xây dựng với mục tiêu phát triển với mục tiêu xây dựng cộng đồng Toán học cho các bạn trẻ yêu toán và là sân chơi lớn nhất về Toán học cho các bạn trẻ yêu toán, các thầy cô giáo dạy toán, các nhà toán học có quan tâm đến nền tảng toán học phổ thông và phổ biến kiến thức toán học cho mọi người tại Việt Nam, cũng như người Việt học và làm toán khắp nơi trên thế giới. </p>
+            <p>Chân thành cảm ơn sự quan tâm của quý bạn đọc.</p>
+        </div>
+        <!-- end links -->
+    </div>
+    <!-- end widget -->
+</div>
+<div class="col-md-4 col-sm-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Mạng xã hội</h4>
+            <hr>
+        </div>
+        <!-- end widget-title -->
+        <div class="links-widget darkcolor m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                <ul class="sociallinks">
+                    <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i> Pinterest</a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i> Google Plus</a></li>
+                    <li><a href="#"><i class="fa fa-vimeo"></i> Vimeo</a></li>
+                    <li><a href="#"><i class="fa fa-youtube"></i> YouTube</a></li>
+                    <li><a href="#"><i class="fa fa-maxcdn"></i> MaxCDN</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end links -->
+    </div>
+    <!-- end widget -->
+</div>
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Gửi liên hệ</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                <div class="commentform">
+                    <form class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <label>Họ tên <span class="required">*</span></label>
+                            <input type="text" class="form-control" placeholder="">
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" class="form-control" placeholder="">
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <label>Tiêu đề</label>
+                            <input type="text" class="form-control" placeholder="">
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label>Nội dung tin nhắn <span class="required">*</span></label>
+                            <textarea class="form-control" placeholder=""></textarea>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <input type="submit" value="Gửi tin nhắn" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<!-- CUSTOM PLUGINS -->
+<script>
+    var marker;
+    var myLatLng = { lat: 10.793099863989733, lng: 106.65770172271914 };
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: myLatLng
+        });
+
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: myLatLng
+        });
+        marker.addListener('click', toggleBounce);
+    }
+
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoouu1c7v89T1YLdwcOj_IuhV4szq3TqA&callback=initMap" async defer></script>

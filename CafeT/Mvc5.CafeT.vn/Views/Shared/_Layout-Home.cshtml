@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from webyzona.com/templates/themeforest/globalnews/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Mar 2017 08:39:59 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - ChuyenToan.vn</title>
+    <link rel="shortcut icon" href="~/Assets/Templates/GlobalNews/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Assets/Templates/GlobalNews/images/favicon.ico" type="image/x-icon">
+    <!-- bootstrap styles-->
+    <link href="~/Assets/Templates/GlobalNews/css/bootstrap.min.css" rel="stylesheet">
+    <!-- google font -->
+    @*<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>*@
+    <link href="~/Assets/Templates/GlobalNews/css/fonts.googleapis.com.css" rel="stylesheet" type='text/css' />
+    <!-- ionicons font -->
+    <link href="~/Assets/Templates/GlobalNews/css/ionicons.min.css" rel="stylesheet">
+    <!-- animation styles -->
+    <link rel="stylesheet" href="~/Assets/Templates/GlobalNews/css/animate.css" />
+    <!-- custom styles -->
+    <link href="~/Assets/Templates/GlobalNews/css/custom-red.css" rel="stylesheet" id="style">
+    <!-- owl carousel styles-->
+    <link rel="stylesheet" href="~/Assets/Templates/GlobalNews/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Assets/Templates/GlobalNews/css/owl.transitions.css">
+    <!-- magnific popup styles -->
+    <link rel="stylesheet" href="~/Assets/Templates/GlobalNews/css/magnific-popup.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <!--End My Css-->
+    <!--Start My script-->
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <!--End My Script-->
+</head>
+<body>
+    <!-- preloader start -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+    <!-- preloader end -->
+    <!-- style switcher start -->
+    <div class="switcher" style="left:-50px;">
+        <a id="switch-panel" class="hide-panel"> <i class="ion-gear-a"></i> </a>
+        <div id="switcher">
+            <ul class="colors-list">
+                <li><a href="#" class="red" id="custom-red"></a></li>
+                <li><a href="#" class="green" id="custom-green"></a></li>
+                <li><a href="#" class="purple" id="custom-purple"></a></li>
+                <li><a href="#" class="blue" id="custom-blue"></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- style switcher end -->
+    <!-- wrapper start -->
+    <div class="wrapper">
+        <!-- header toolbar start -->
+        <div class="header-toolbar">
+            @RenderPage("~/Views/Shared/Templates/_Header.cshtml")
+        </div>
+        <!-- header toolbar end -->
+        <!-- sticky header start -->
+        <div class="sticky-header">
+            <!-- header start -->
+            <div class="container header">
+                <div class="row">
+                    <div class="col-sm-5 col-md-5 wow fadeInUpLeft animated"><a class="navbar-brand" style="background: url('../../Assets/Customizes/images/chuyen-toan.png')" href="/">ChuyenToan.vn</a></div>
+                    <div class="col-sm-11 col-md-11 hidden-xs text-right"><img src="~/Assets/Templates/GlobalNews/images/ads/468-60-ad.gif" width="468" height="60" alt="" /></div>
+                </div>
+            </div>
+            <!-- header end -->
+            <!-- nav and search start -->
+            <div class="nav-search-outer">
+                <!-- nav start -->
+                @RenderPage("~/Views/Shared/Templates/_Menu.cshtml")
+                <!--nav end-->
+            </div>
+            <!-- nav and search end-->
+        </div>
+        <!-- sticky header end -->
+        <!-- top sec start -->
+        <div class="container">
+            <div class="row">
+                <!-- hot news start -->
+                <div class="col-sm-16 hot-news hidden-xs">
+                    @RenderPage("~/Views/Shared/Templates/_AdsNews.cshtml")
+                </div>
+                <!-- hot news end -->
+                <!-- banner outer start -->
+                <div class="col-sm-16 banner-outer wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                    @RenderPage("~/Views/Shared/Templates/_Top.cshtml")
+                </div>
+                <!-- banner outer end -->
+
+            </div>
+        </div>
+        <!-- top sec end -->
+        <!-- data start -->
+
+        <div class="container ">
+            <div class="row ">
+                <!-- left sec start -->
+                <div class="col-md-11 col-sm-11">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- left sec end -->
+                <!-- right sec start -->
+                <div class="col-sm-5 hidden-xs right-sec">
+                    @RenderPage("~/Views/Shared/Templates/_Left.cshtml")
+                </div>
+                <!-- right sec end -->
+            </div>
+        </div>
+        <!-- data end -->
+        <!-- Footer start -->
+        <footer>
+            @RenderPage("~/Views/Shared/Templates/_Footer.cshtml")
+        </footer>
+        <!-- Footer end -->
+        <div id="create-account" class="white-popup mfp-with-anim mfp-hide">
+            <form role="form">
+                <h3>Create Account</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" tabindex="2">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="display_name" id="display_name" class="form-control" placeholder="Display Name" tabindex="3">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" class="form-control " placeholder="Email Address" tabindex="4">
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control " placeholder="Password" tabindex="5">
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm Password" tabindex="6">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-16">
+                        <input type="submit" value="Register" class="btn btn-danger btn-block btn-lg" tabindex="7">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="log-in" class="white-popup mfp-with-anim mfp-hide">
+            @Ajax.BeginForm("Login", "Account", new AjaxOptions()
+       {
+           HttpMethod = "GET",
+           AllowCache = false,
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "PartialView-Login"
+       })
+            <div id="PartialView-Login"></div>
+        </div>
+    </div>
+    <!-- wrapper end -->
+    <!-- jQuery -->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.min.js"></script>
+    <!--jQuery easing-->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.easing.1.3.js"></script>
+    <!-- bootstrab js -->
+    <script src="~/Assets/Templates/GlobalNews/js/bootstrap.js"></script>
+    <!--style switcher-->
+    <script src="~/Assets/Templates/GlobalNews/js/style-switcher.js"></script> <!--wow animation-->
+    <script src="~/Assets/Templates/GlobalNews/js/wow.min.js"></script>
+    <!-- time and date -->
+    <script src="~/Assets/Templates/GlobalNews/js/moment.min.js"></script>
+    <!--news ticker-->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.ticker.js"></script>
+    <!-- owl carousel -->
+    <script src="~/Assets/Templates/GlobalNews/js/owl.carousel.js"></script>
+    <!-- magnific popup -->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.magnific-popup.js"></script>
+    <!-- weather -->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.simpleWeather.min.js"></script>
+    <!-- calendar-->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.pickmeup.js"></script>
+    <!-- go to top -->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.scrollUp.js"></script>
+    <!-- scroll bar -->
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.nicescroll.js"></script>
+    <script src="~/Assets/Templates/GlobalNews/js/jquery.nicescroll.plus.js"></script>
+    <!--masonry-->
+    <script src="~/Assets/Templates/GlobalNews/js/masonry.pkgd.js"></script>
+    <!--media queries to js-->
+    <script src="~/Assets/Templates/GlobalNews/js/enquire.js"></script>
+    <!--custom functions-->
+    <script src="~/Assets/Templates/GlobalNews/js/custom-fun.js"></script>
+
+    <!--Start My script-->
+
+    <!--End My Script-->
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+        });
+    </script>
+    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+<!-- Mirrored from webyzona.com/templates/themeforest/globalnews/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Mar 2017 08:42:46 GMT -->
+</html>

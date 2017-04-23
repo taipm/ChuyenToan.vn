@@ -1,0 +1,94 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model IEnumerable<Mvc5.CafeT.vn.Models.WorkModel>
+
+@{
+    ViewBag.Title = "Người tìm việc - Chuyên ngành CNTT";
+}
+
+<div class="col-md-6">
+    <section>
+        <header>
+            <span>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Add Work", "Create", "WorkModels", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add Job", "Create", "JobModels", null, new { @class = "btn btn-danger" })
+                }
+            </span>
+        </header>
+    </section>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Tìm kiếm
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Index", "WorkModels", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+            {
+                @Html.TextBox("searchString", null, new { id = "Search" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+            }
+        </div>
+    </div>
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Hot Jobs
+            </div>
+            <div class="panel-body">
+                <div id="searchResults">
+                    <ul class="style1">
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <h4>
+                                    @Html.ActionLink(item.Title, "Details", "WorkModels", new { id = item.Id }, null)
+                                </h4>
+                                
+                                <span>
+                                    @Html.Raw("Địa điểm: " + item.Location)
+                                    @Html.Raw("| Lương: " + item.SalaryOnHour)
+                                    @Html.Raw(item.CountViews)
+                                    @Html.Raw(item.LastViewAt)
+                                    @Html.Raw(item.LastViewBy)
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Xem thêm", "Index", "WorkModels")
+            </div>
+        </div>
+    </section>
+    
+</div>
+
+<div class="col-md-6">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Hot Jobs
+            </div>
+            <div class="panel-body">
+                @Html.Partial("_Jobs", (IEnumerable<JobModel>)ViewBag.HotJobs)
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Xem thêm", "Index", "WorkModels")
+            </div>
+        </div>
+    </section>
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Việc mới
+            </div>
+            <div class="panel-body">
+                @Html.Partial("_Jobs", (IEnumerable<JobModel>)ViewBag.HotJobs)
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Xem thêm", "Index", "WorkModels")
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,34 @@
+﻿@using Mvc5.CafeT.vn.Models;
+
+@model IEnumerable<Mvc5.CafeT.vn.Models.JobModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+        if(!string.IsNullOrWhiteSpace(item.AvatarPath))
+        {
+            imageUrl = item.AvatarPath;
+        }
+        string title = item.Title;
+        if (title.Length > 100)
+        {
+            title = title.Substring(0, 100) + " ...";
+        }
+
+        <div class="post clearfix">
+            <div class="mini-widget-thumb">
+                <a href="/tuyen-dung/@item.Id">
+                    <img alt="" src="@imageUrl" class="img-responsive">
+                </a>
+            </div>
+            <div class="mini-widget-title">
+                <a href="/tuyen-dung/@item.Id"> @title</a>
+                <span class="label label-primary">Full time</span>
+                <span class="label label-primary">@item.Company.Name</span>
+                <span class="label label-primary">@String.Format("{0:0,0.0}", item.SalaryInMoth)/Tháng</span>
+            </div>
+        </div>
+    }
+}

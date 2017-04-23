@@ -1,0 +1,58 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ExamView
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+
+<div class="row">
+    <div class="col-md-9">
+        <section>
+            <header>
+                <h3>@Html.Raw(Model.Name)</h3>
+                <span>
+                    @Html.Raw("Created: " + Model.CreatedDate) @Html.Raw(" By: " + Model.CreatedBy)
+                    | @Html.Raw("Updated: " + Model.LastUpdatedDate)
+                    | @Html.Raw("Vews: " + Model.CountViews)
+                </span>
+            </header>
+            @if (Model.Description != null && Model.Description.Length > 1)
+            {
+                <p>
+                    @Html.Raw("Description")
+                </p>
+                @Html.Raw(Model.Description)
+            }
+            <div id="AjaxUpdate">
+                @Html.Raw(Model.Description)
+            </div>
+            <div class="row">
+                @Html.Partial("_AddQuestion", Model.QuestionCreate)
+            </div>
+
+        </section>
+        <header>
+            <h4>Actions</h4>
+        </header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>
+                @Html.ActionLink("Edit", "Edit", "Exams", new { id = Model.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        }
+
+    </div>
+    <div class="col-md-3">
+        @*@Html.Partial("_Questions", Model.Questions)*@
+    </div>
+</div>
+
+

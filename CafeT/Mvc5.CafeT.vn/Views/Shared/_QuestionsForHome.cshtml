@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.QuestionModel>
+
+<ul class="style1">
+    @foreach (var item in Model) {
+        <li>
+            @Html.ActionLink(item.Title, "Details", "Questions", new { id = item.Id }, null)
+            <br />
+            <span>
+                @Html.Raw(item.CreatedBy) @Html.Raw(" | ") @Html.Raw(item.CreatedDate.ToShortDateString())
+                @if (item.Answers != null)
+                {
+                    @Html.Raw(" | Có: " + item.Answers.Count() + " trả lời")
+                }
+            </span>
+
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <br />
+                @Html.ActionLink("Trả lời", "AddAnswer", "Questions", new { id = item.Id }, null)
+                if (User.Identity.Name == item.CreatedBy)
+                {
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Edit", "Edit", "Questions", new { id = item.Id }, null)
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "Delete", "Questions", new { id = item.Id }, null)
+                }
+            }
+        </li>
+    }
+</ul>

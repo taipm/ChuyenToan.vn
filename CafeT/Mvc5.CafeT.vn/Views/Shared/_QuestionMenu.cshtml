@@ -1,0 +1,15 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+<ul class="style1">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.Identity.Name == Model.CreatedBy)
+        {
+            @Html.ActionLink("Edit", "Edit", "Questions", new { id = Model.Id }, null)
+            @Html.Raw(" | ")
+            @Html.ActionLink("Delete", "Delete", "Questions", new { id = Model.Id }, null)
+            @Html.Raw(" | ")
+        }
+        @Html.ActionLink("Trả lời", "AddAnswer", "Questions", new { id = Model.Id }, null)
+    }
+</ul>

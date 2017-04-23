@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.QuestionModel>
+
+@foreach (var item in Model)
+{
+    @Html.ActionLink(item.Title, "Details", "Questions", new { id = item.Id }, null)
+    <br />
+    <span>@Html.Raw(item.EstimationTime)</span>
+    <p>
+        @Html.Raw(item.Content)
+    </p>
+    <p>
+        @Html.Partial("_QuestionMenu", item)
+    </p>    
+}

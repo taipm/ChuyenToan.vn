@@ -1,0 +1,92 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model IEnumerable<Mvc5.CafeT.vn.Models.ProjectModel>
+
+@{
+    ViewBag.Title = "CafeT.vn - Projects";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <section>
+            <header>
+                <h4>Projects</h4>
+                <span>Các dự án của CafeT.vn</span>
+            </header>
+            <ul class="style1">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <h4>
+                            @Html.ActionLink(item.Name, "Details", "Projects", new { id = item.Id }, null)
+                        </h4>
+                        <span>
+                            @item.CreatedBy on @item.CreatedDate.ToShortDateString() | @Html.Raw("Articles: " + item.Articles.Count)
+                        </span>
+                        <br />
+                        @Html.Raw(item.Description)
+                        <br />
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Projects", new { id = item.Id }, null)
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", "Projects", new { id = item.Id }, null)
+                        }
+                    </li>
+                }
+            </ul>
+        </section>
+    </div>
+    <div class="col-md-3">
+        <section class="sidebar">
+            <header>
+                <h4>Xem nhiều</h4>
+            </header>
+            <ul class="style1">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                        <br />
+                        <span>
+                            @item.CreatedBy on @item.CreatedDate.ToShortDateString() | @Html.Raw("Articles: " + item.Articles.Count)
+                        </span>
+                        <br />
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        }
+                    </li>
+                }
+            </ul>
+        </section>
+    </div>
+    <div class="col-md-3">
+        <section class="sidebar">
+            <header>
+                <h4>Feugiat Tempus</h4>
+            </header>
+            <ul class="style1">
+                <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+                <li><a href="#">Etiam rhoncus volutpat erat</a></li>
+                <li><a href="#">Donec dictum metus in sapien</a></li>
+                <li><a href="#">Nulla luctus eleifend purus</a></li>
+                <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+            </ul>
+        </section>
+        <section class="sidebar">
+            <header>
+                <h4>Files</h4>
+            </header>
+            <ul class="style1">
+                <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+                <li><a href="#">Etiam rhoncus volutpat erat</a></li>
+                <li><a href="#">Donec dictum metus in sapien</a></li>
+                <li><a href="#">Nulla luctus eleifend purus</a></li>
+                <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+            </ul>
+        </section>
+    </div>
+</div>
+

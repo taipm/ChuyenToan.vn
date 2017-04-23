@@ -1,0 +1,22 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationUser
+
+@{
+    string birthDay = "";
+    if (Model.Birthday.HasValue)
+    {
+        birthDay = Model.Birthday.Value.ToString("dd/MM/yyyy");
+    }
+}
+
+<dl class="dl-horizontal">
+    <dt>Tên:</dt>
+    <dd>@Model.FirstName</dd>
+    <dt>Họ:</dt>
+    <dd>@Model.LastName</dd>
+    <dt>Ngày sinh:</dt>
+    <dd>@birthDay</dd>
+    <dt>Điểm:</dt>
+    <dd>@Model.Points</dd>
+    <dt>Lượt xem:</dt>
+    <dd>@Model.CountViews</dd>
+</dl>

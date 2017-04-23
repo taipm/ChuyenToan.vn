@@ -1,0 +1,72 @@
+﻿@using Mvc5.CafeT.vn.Models
+@using CaptchaMvc.HtmlHelpers
+
+   
+@model LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Đăng nhập tài khoản</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Bạn có phải là Bot không ?", new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.MathCaptcha()
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Đăng ký tài khoản mới?", "Register")
+                    </p>
+                    <p>
+                        @Html.ActionLink("Quên mật khẩu ?", "ForgotPassword")
+                    </p>
+                }
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

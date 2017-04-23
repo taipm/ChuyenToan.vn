@@ -1,0 +1,27 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@*if (HttpRuntime.Cache["LoggedInUsers"] != null)*@
+
+@{
+    var loggedOnUsers = HttpRuntime.Cache["LoggedInUsers"] as Dictionary<string, DateTime>;
+    int totalUsers = (int)HttpContext.Current.Application["TotalOnlineUsers"];
+    var _db = new ApplicationDbContext();
+}
+<div class="StatsBox">
+
+    <span>Registered Users: </span> @_db.Users.Count()
+    <br />
+    <span>UnConfirmed Users: </span> @_db.Users.Count(u => u.EmailConfirmed == false)
+    <br />
+    <span>Locked Users: </span> @_db.Users.Count(u => u.LockoutEnabled)
+
+    @if (loggedOnUsers != null)
+    {
+        <br />
+        <span>Online Registered Users: </span> @loggedOnUsers.Count
+        <br />
+        <span>Online Guest Users: </span> @(totalUsers - loggedOnUsers.Count)
+        <br />
+        <span>Total Online Users: </span> @totalUsers
+    }
+
+</div>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.FileModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Files")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (item.FileName != null && item.FileName.Length > 0)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.FileName, "Details", "FileModels", new { id = item.Id }, null)
+                | @Html.DisplayFor(modelItem => item.SizeToString)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+}
+
+</table>

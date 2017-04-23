@@ -1,0 +1,127 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.JobModel
+
+@{
+    ViewBag.Title = Model.Title;
+    string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+    if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
+    {
+        imageUrl = Model.AvatarPath;
+    }
+    string start = "";
+    if (Model.Start.HasValue)
+    {
+        start = DateTime.Now.Date.Subtract(Model.Start.Value.Date).TotalDays + " ngày";
+    }
+    string end = "";
+    if (Model.End.HasValue)
+    {
+        end = Model.End.Value.Date.Subtract(Model.Start.Value.Date).TotalDays + " ngày";
+    }
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Thông tin tuyển dụng</h4>
+            <hr>
+        </div>
+        <div class="large-widget m10">
+            <div class="post clearfix">
+                <div class="title-area text-center">
+                    <div class="colorfulcats">
+                        <a href="javascript:void(0);"><span class="label label-danger">Part Time</span></a>
+                    </div>
+                    <h3>@Model.Title</h3>
+                    <div class="large-post-meta">
+                        <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</a></span>
+                        <small class="hidden-xs">&#124;</small>
+                        <span class="hidden-xs"><a href="javascript:void(0);"><i class="fa fa-map-marker"></i> @Model.Address</a></span>
+                        <small class="hidden-xs">&#124;</small>
+                        <span class="hidden-xs"><a href="javascript:void(0);"><i class="fa fa-briefcase"></i> Chưa xác định</a></span>
+                        @if(Model.CreatedBy == User.Identity.Name)
+                        {
+                            <small class="hidden-xs">&#124;</small>
+                            <span class="hidden-xs"><a href="/cap-nhat-tin-tuyen-dung/@Model.Id"><i class="fa fa-edit"></i> Chỉnh sửa</a></span>
+                        }
+                    </div><!-- end meta -->
+                    <div class="post-sharing">
+                        <ul class="list-inline">
+                            <li style="text-align: center; align-items: center; vertical-align: central;">
+                                <div class="fb-share-button"
+                                     data-layout="button_count"
+                                     data-href="http://chuyentoan.vn/tuyen-dung/@Model.Id">
+                                </div>
+                            </li>
+                            <li style="text-align: center; align-items: center; vertical-align: central;">
+                                <g:plusone annotation="inline"></g:plusone>
+                            </li>
+                        </ul>
+                    </div><!-- end post-sharing -->
+                </div><!-- /.pull-right -->
+                <div class="job-media row">
+                    <div class="col-sm-5">
+                        <img alt="" src="@imageUrl" class="img-responsive">
+                    </div>
+                    <div class="col-sm-7 job-details">
+                        <h3>Thông tin chi tiết</h3>
+                        <ul class="">
+                            <li><strong><i class="fa fa-user"></i> Người đăng :</strong> @Html.ActionLink(Model.CreatedBy, "Details", "ApplicationUsers", new { userName = @Model.CreatedBy }, htmlAttributes: new { title = "Thông tin thành viên" })</li>
+                            <li><strong><i class="fa fa-briefcase"></i> Vị trí :</strong> <a href="javascript:void(0);"> Chưa xác định</a></li>
+                            <li><strong><i class="fa fa-dollar"></i> Lương :</strong> @string.Format("{0:0,0.00}", Model.SalaryInMoth) VNĐ</li>
+                            <li><strong><i class="fa fa-clock-o"></i> Đã đăng :</strong> @start</li>
+                            <li><strong><i class="fa fa-cog"></i> Còn lại :</strong> @end</li>
+                        </ul>
+                        <a href="#appljpob" class="btn btn-primary"><i class="fa fa-check"></i> Ứng tuyển</a> <a href="javascript:void(0);" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Gửi câu hỏi</a>
+                    </div>
+                </div>
+            </div><!-- end post -->
+            <div class="post-desc">
+                <h3>Mô tả</h3>
+                <hr>
+                <p>@Html.Raw(Model.Description)</p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget">
+                            <h3>Gửi thông tin ứng tuyển</h3>
+                            <hr>
+                            <div id="appljpob" class="commentform">
+                                <form class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <label>Chi tiết <span class="required">*</span></label>
+                                        <textarea class="form-control" placeholder=""></textarea>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label>Vị trí công việc <span class="required">*</span></label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label>Thời gian bắt đầu <span class="required">*</span></label>
+                                        <input type="email" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label>Họ và tên <span class="required">*</span></label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label>Địa chỉ Email <span class="required">*</span></label>
+                                        <input type="email" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label>Link thông tin cá nhân</label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <input type="submit" value="Gửi yêu cầu" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div><!-- end newsletter -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end post-desc -->
+
+        </div><!-- end large-widget -->
+    </div>
+</div>

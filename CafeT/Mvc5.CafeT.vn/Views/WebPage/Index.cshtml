@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.WebPageModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meta)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meta)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="row">
+    @{
+        if (Model != null && Model.Count() > 0)
+        {
+            string _first = Model.FirstOrDefault().HtmlContent;
+            List<string> _items = new List<string>();
+            for (int i = 1; i < Model.Count(); i++)
+            {
+                _items.Add(Model.ToList()[i].HtmlContent);
+            }
+            string[] _words = _first.IntersectWords(_items.ToArray()).ToArray();
+            <h4>
+                @Html.Raw(_words.Count())
+            </h4>
+
+            foreach (string str in _words)
+            {
+                if (str.Contains("class") || str.Contains("div"))
+                {
+                    @Html.Raw(str)<br />
+                }
+
+            }
+        }
+
+    }
+</div>

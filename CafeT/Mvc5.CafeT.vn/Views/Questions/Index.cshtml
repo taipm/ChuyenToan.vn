@@ -1,0 +1,144 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.Models.QuestionModel>
+@using PagedList.Mvc;
+@using Mvc5.CafeT.vn.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Tìm kiếm
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Index", "Questions", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+            {
+                @Html.TextBox("searchString", null, new { id = "Search" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+            }
+        </div>
+        <div class="panel-footer">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Create", "Create", "Questions", new { @class = "btn btn-success" }, null)
+            }
+        </div>
+    </div>
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Câu hỏi/Bài tập (@Model.Count)
+                </h4>
+                <span>
+                    @Ajax.ActionLink("Cơ bản (" + Model.Where(t => t.Level == 0).Count() + ")", "GetAllByLevel", "Questions", new { level = 0 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Dễ (" + Model.Where(t => t.Level == 1).Count() + ")", "GetAllByLevel", "Questions", new { level = 1 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Trung bình (" + Model.Where(t => t.Level == 2).Count() + ")", "GetAllByLevel", "Questions", new { level = 2 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Khá (" + Model.Where(t => t.Level == 3).Count() + ")", "GetAllByLevel", "Questions", new { level = 3 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Giỏi (" + Model.Where(t => t.Level == 4).Count() + ")", "GetAllByLevel", "Questions", new { level = 4 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+                    @Html.Raw(" | ")
+                    @Ajax.ActionLink("Khó (" + Model.Where(t => t.Level == 5).Count() + ")", "GetAllByLevel", "Questions", new { level = 5 },
+                     new AjaxOptions
+                     {
+                         UpdateTargetId = "AjaxUpdate",
+                         InsertionMode = InsertionMode.Replace,
+                         HttpMethod = "Get"
+                     }, null)
+
+                </span>
+                <span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @*@Html.ActionLink("My drafts", "GetAllDrafted", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My published", "GetAllPublished", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My articles", "GetAll", "Issues", new { @class = "btn btn-success" })*@
+                    }
+                </span>
+            </div>
+            <div class="panel-body" id="AjaxUpdate">
+                <ul class="style1">
+                    @Html.Partial("_Questions", Model)
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                    of @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", "Questions", new { page }))
+                </ul>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+    <div id="searchResults"></div>
+</div>
+
+<div class="col-md-3">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>Giải nhiều</h4>
+                <span>Các câu hỏi có nhiều lời giải</span>
+            </div>
+            <div class="panel-body">
+                @Html.Partial("_Questions", (IEnumerable<QuestionModel>)ViewBag.TopAnswers)
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+    
+</div>
+<div class="col-md-3">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>Chưa có lời giải</h4>
+                <span>Các câu hỏi chưa có lời giải</span>
+            </div>
+            <div class="panel-body">
+                @Html.Partial("_Questions", (IEnumerable<QuestionModel>)ViewBag.NoAnswers)
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

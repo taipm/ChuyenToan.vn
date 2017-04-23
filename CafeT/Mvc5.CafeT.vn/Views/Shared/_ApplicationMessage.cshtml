@@ -1,0 +1,19 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationMessage
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>@Html.Raw(Model.Name)</h4>
+    </div>
+    <div class="panel-body">
+        @Html.Raw(Model.Message)
+    </div>
+    <div class="panel-footer">
+        <p>
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "ApplicationMessages", new { id = Model.Id }, null)
+            }
+        </p>
+    </div>
+</div>
+

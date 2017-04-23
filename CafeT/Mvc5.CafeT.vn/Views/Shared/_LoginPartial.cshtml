@@ -1,0 +1,24 @@
+﻿@using Mvc5.CafeT.vn.Models
+
+@if (Request.IsAuthenticated)
+{
+    <div style="padding: 0!important; text-align: center;">
+        @Html.ActionLink("Xin chào: " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <br />
+        <input onClick="window.location.href='/Account/LogOff'" class="btn btn-primary" value="Đăng xuất" type="button" />
+    </div>
+}
+else
+{
+    <div style="padding: 0!important; text-align: center;">
+        <input onClick="window.location.href='/dang-nhap'" class="btn btn-primary" value="Đăng nhập" type="button" />
+        <input onClick="window.location.href='/dang-ky'" class="btn btn-info" value="Đăng ký" type="button" />
+        <hr />
+        <p>
+            <a href="/quen-mat-khau">Quên mật khẩu?</a>
+        </p>
+        <section id="socialLoginForm">
+            @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+}

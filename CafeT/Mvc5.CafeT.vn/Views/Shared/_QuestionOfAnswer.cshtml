@@ -1,0 +1,29 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model Mvc5.CafeT.vn.Models.QuestionModel
+
+<h4>@Html.Raw(Model.Title)</h4>
+<span>
+    @Html.Raw("Created by:" + Model.CreatedBy)
+    @Html.Raw(" on ")
+    @Html.Raw(Model.CreatedDate.ToShortDateString())
+    @if (!Model.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+    {
+        @Html.Raw(Model.LastUpdatedBy)
+        @Html.Raw(" on ")
+
+    }
+    @if (Model.LastUpdatedDate != null && Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+    }
+    <br />
+    @if (ViewBag.Article != null)
+    {
+        @Html.Partial("_ArticleTitle", (ArticleModel)ViewBag.Article)
+    }
+</span>
+<hr />
+<p>
+    @Html.Raw(Model.Content)
+</p>
+

@@ -1,0 +1,57 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationUser
+
+
+@{
+    string avartarUrl = "/Assets/Customizes/images/avatar_default.png";
+    if(!string.IsNullOrWhiteSpace(@ViewBag.Avatar))
+    {
+        avartarUrl = @ViewBag.Avatar;
+    }
+}
+
+<link href="~/Content/avatar/imgareaselect-default.css" rel="stylesheet" />
+<link href="~/Content/avatar/jquery.awesome-cropper.css" rel="stylesheet" />
+
+<div class="media-left">
+    <div class="media-left">
+        <a href="javascript:void(0);">
+            <img class="media-object" id="url-avatar" alt="..." src="@avartarUrl" />
+        </a>
+    </div>
+    <div class="media-body">
+        <div class="media-heading">
+            Chào bạn: @Html.Raw(Model.GetFullName())
+        </div>
+        @Html.Raw(Model.About)
+    </div>
+</div>
+<div>
+    <form role="form" method="post" action="/Manage/UploadAvatar">
+        <input id="imageBase" type="hidden" name="imageBase">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu</button>
+    </form>
+</div>
+
+<script src="~/Scripts/avatar/jquery.imgareaselect.js"></script>
+<script src="~/Scripts/avatar/jquery.awesome-cropper.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#imageBase').awesomeCropper(
+        { width: 110, height: 110, debug: true }
+        );
+    });
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

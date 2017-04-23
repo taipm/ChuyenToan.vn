@@ -1,0 +1,54 @@
+﻿@using Mvc5.CafeT.vn.Models
+@using Mvc5.CafeT.vn.ModelViews
+
+@{
+    ViewBag.Title = "ChuyenToan.vn - Toán học & Đam mê";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Bài viết nổi bật <span><a href="/bai-viet">Xem tất cả</a></span></h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            @Html.Partial("_Articles-Box", (IEnumerable<ArticleView>)ViewBag.HotArticles)
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Bài viết mới <span><a href="/bai-viet">Xem tất cả (@ViewBag.CountArticles)</a></span></h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            @Html.Partial("_Articles-Box", (IEnumerable<ArticleView>)ViewBag.NewArticles)
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<div class="col-md-6">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Sách và Tài liệu <span><a href="/tai-lieu">Xem tất cả (@ViewBag.CountFiles)</a></span></h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            @Html.Partial("_Files-Box", (IEnumerable<FileModel>)ViewBag.Files)
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<div class="col-md-6">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Bài giảng video <span><a href="javascript:void(0);">Xem tất cả</a></span></h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            @RenderPage("~/Views/Shared/_Videos-Box.cshtml")
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->

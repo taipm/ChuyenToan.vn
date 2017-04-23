@@ -1,0 +1,17 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+<div>
+    @Html.HiddenFor(x=>x.Id)
+    <h3> @Model.Title </h3>
+    @Html.Raw(Model.Content)
+      
+    @foreach (var a in Model.Answers)
+    {
+        @*<p>
+            @Html.RadioButtonFor(b=>b.SelectAnswer.Content, Model.Id)  @a.Name 
+        </p>*@
+      
+    }
+</div>
+
+

@@ -1,0 +1,18 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model IEnumerable<Mvc5.CafeT.vn.Models.JobModel>
+
+@{
+    ViewBag.Title = "Tin tuyển dụng";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Tin tuyển dụng</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="widget searchwidget indexslider">
+            @Html.Partial("_Jobs-Items", Model)
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->

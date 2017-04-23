@@ -1,0 +1,40 @@
+﻿
+<div class="list-group">
+   
+    <a href="#" class="list-group-item active">
+            Questions
+        </a>
+    <ul class="list-group">
+       
+        <li class="list-group-item">
+            @Ajax.ActionLink("Articles (Đã xuất bản)", "GetAllPublishedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.CountOfPublished</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Articles (Đang soạn)", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.CountOfDrafted</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Articles (Chưa duyệt)", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">@ViewBag.CountOfDrafted</span>
+        </li>
+    </ul>
+</div>

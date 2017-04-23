@@ -1,0 +1,166 @@
+﻿@model Mvc5.CafeT.vn.Models.JobModel
+
+@{
+    ViewBag.Title = Model.Title;
+    string avartarUrl = "/Assets/Customizes/images/article_default.jpg";
+    if (Model != null)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
+        {
+            avartarUrl = Model.AvatarPath;
+        }
+    }
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Cập nhật tin tuyển dụng</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-horizontal">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.CompanyId)
+                        @Html.HiddenFor(model => model.CreatedBy)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.CountViews)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalaryInMoth, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.SalaryInMoth, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SalaryInMoth, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextArea("Description", new { @id = "Description" })
+                                <script>
+                                    CKEDITOR.replace('Description');
+                                </script>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.CompanyId, new SelectList(ViewBag.Companies, "Value", "Text"), "------ Chọn ------", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvatarPath, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.AvatarPath, new { htmlAttributes = new { @class = "form-control", @id = "avatarPath", @readOnly = true } })
+                                @Html.ValidationMessageFor(model => model.AvatarPath, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvatarPath, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <a href="javascript:void(0);">
+                                    <img class="media-object" width="200" height="115" id="url-avatar" alt="..." src="@avartarUrl" />
+                                </a>
+                                <a href="/Avatar/_Upload?folderName=Jobs" class="show-modal"><i class="glyphicon glyphicon-edit"></i> Thay đổi</a>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Cập nhật</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+                    @Html.ActionLink("Quay lại", "Index")
+                </div>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" id="myModalContent"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        // show modal
+        $(".show-modal").click(function () {
+            $("#myModalContent").load(this.href, function () {
+                $("#myModal").modal({
+                    backdrop: 'static',
+                    keyboard: true
+                }, 'show');
+                //Return url
+                $('#btn-save').click(function () {
+                    var urlFull = document.getElementById("final-image").getAttribute('src');
+                    var urlValue = urlFull.replace(/[\\]/g, "/");
+
+                    document.getElementById("url-avatar").src = urlFull;
+                    document.getElementById("avatarPath").value = urlFull;
+                    $('#myModal').modal('hide');
+                });
+            });
+            return false;
+        });
+    </script>
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

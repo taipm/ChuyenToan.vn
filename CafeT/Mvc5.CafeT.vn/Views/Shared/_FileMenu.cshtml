@@ -1,0 +1,31 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.FileModel
+
+@if (Model != null)
+{
+    if (Model.IsExits(Model.FullPath))
+    {
+        <p>
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw("|")
+                @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw("|")
+                @Html.ActionLink("Rename", "Rename", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw("|")
+                @Html.ActionLink("Zip", "Zip", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw("|")
+                @Html.ActionLink("Mã hóa", "Encrypt", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw("|")
+                @Html.ActionLink("Giải mã", "Decrypt", "FileModels", new { id = Model.Id }, null)
+            }
+        </p>
+    }
+    else
+    {
+        <p class="panel-info">
+            This file is not exits on your storage, pls check and update this file.
+        </p>
+    }
+}

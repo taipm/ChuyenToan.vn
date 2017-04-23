@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3FA76C2-4533-463D-AAB5-17E5DD8269D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CafeT.BusinessObjects</RootNamespace>
+    <AssemblyName>CafeT.BusinessObjects</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="ECommerce\CostObject.cs" />
+    <Compile Include="ECommerce\CostObjects.cs" />
+    <Compile Include="ECommerce\CostType.cs" />
+    <Compile Include="ECommerce\ProductObject.cs" />
+    <Compile Include="ELearning\Answer.cs" />
+    <Compile Include="ELearning\Article.cs" />
+    <Compile Include="ELearning\Book.cs" />
+    <Compile Include="ELearning\Comment.cs" />
+    <Compile Include="ELearning\Course.cs" />
+    <Compile Include="ELearning\Exam.cs" />
+    <Compile Include="ELearning\Examer.cs" />
+    <Compile Include="ELearning\Learner.cs" />
+    <Compile Include="ELearning\Question.cs" />
+    <Compile Include="ELearning\Reader.cs" />
+    <Compile Include="ELearning\Trainer.cs" />
+    <Compile Include="ELearning\Writer.cs" />
+    <Compile Include="EventObject.cs" />
+    <Compile Include="FileObject.cs" />
+    <Compile Include="ImageObject.cs" />
+    <Compile Include="JobObject.cs" />
+    <Compile Include="Issue.cs" />
+    <Compile Include="IssueStatus.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebPageObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Crawlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CafeT.EF6.Objects\CafeT.EF6.Objects.csproj">
+      <Project>{8b0d379f-96dd-425f-9793-8de51fdc8706}</Project>
+      <Name>CafeT.EF6.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CafeT.Html\CafeT.Html.csproj">
+      <Project>{6F875B12-CE9C-46E4-A8B8-D8A1B0E2DFE2}</Project>
+      <Name>CafeT.Html</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CafeT.Images\CafeT.Images.csproj">
+      <Project>{8652AE43-AC7A-47A1-8BC2-09949B22AF25}</Project>
+      <Name>CafeT.Images</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CafeT.Objects\CafeT.Objects.csproj">
+      <Project>{e9909e52-25be-4f82-873b-daf2ec30de76}</Project>
+      <Name>CafeT.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CafeT.Text\CafeT.Text.csproj">
+      <Project>{5AB7261D-F74C-4853-BD70-4EB2239B89F9}</Project>
+      <Name>CafeT.Text</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
+      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
+      <Name>Repository.Pattern.Ef6</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

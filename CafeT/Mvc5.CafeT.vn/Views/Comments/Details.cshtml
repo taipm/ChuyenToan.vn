@@ -1,0 +1,101 @@
+﻿@model Mvc5.CafeT.vn.Models.CommentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+    //if(!string.IsNullOrWhiteSpace(item.AvatarPath))
+    //{
+    //    imageUrl = item.AvatarPath;
+    //}
+    string title = Model.Title;
+    if (title.Length > 100)
+    {
+        title = title.Substring(0, 100) + " ...";
+    }
+
+    <div class="post clearfix">
+        <div class="mini-widget-thumb">
+            <a href="/Comments/Details/@Model.Id">
+                <img alt="" src="@imageUrl" class="img-responsive">
+            </a>
+        </div>
+        <div class="mini-widget-title">
+            <a href="/Comments/Details/@Model.Id"> @title</a>
+        </div>
+        <div class="post-desc">
+            @Html.Raw(Model.Content)
+        </div><!-- end post-desc -->
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+}
+@*<h2>Details</h2>
+
+<div>
+    <h4>CommentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+</div>
+*@

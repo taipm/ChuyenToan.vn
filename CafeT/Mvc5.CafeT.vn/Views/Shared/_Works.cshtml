@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.WorkModel>
+
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.Title, "Details", "WorkModels", new { id = item.Id }, null)<br />
+            <span>
+                @Html.Raw("Chi phí: " + item.SalaryOnHour) @Html.Raw(" / giờ")
+                @Html.Raw("| Views: " + item.CountViews)
+            </span>
+        </li>
+    }
+</ul>
+

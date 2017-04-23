@@ -1,0 +1,89 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.AnswerModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="col-md-4">
+    @if (ViewBag.Question != null)
+    {
+        @Html.Partial("_QuestionOfAnswer", (QuestionModel)ViewBag.Question)
+    }
+</div>
+
+<div class="col-md-8">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    @Html.Raw(Model.Name)
+                </h4>
+                <span>
+                    @Html.Raw("Views: " + Model.CountViews)
+                    @Html.Raw("Trả lời bởi: " + Model.CreatedBy)
+                    @Html.Raw("lúc: " + Model.CreatedDate.ToShortDateString())
+                    @if (Model.LastUpdatedDate.HasValue)
+                    {
+                        @Html.Raw("Sửa lần cuối bởi: " + Model.LastUpdatedBy)
+                        @Html.Raw("lúc: " + Model.LastUpdatedDate.Value.ToShortDateString())
+                    }
+                </span>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.Content)
+            </div>
+            <div class="panel-footer">
+                @if (!Model.IsCorrect)
+                {
+                    <p>
+                        Rất tiếc, bạn đã trả lời sai. Vui lòng trả lời lại
+                        <br />
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+                        {
+                            if (Model.QuestionId.HasValue)
+                            {
+                                @Html.ActionLink("Re-Answer", "AddAnswer", "Questions", new { id = Model.QuestionId.Value }, null)
+                            }
+                        }
+                    </p>
+                }
+                <p>
+                    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Answers", new { id = Model.Id }, null)
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Back to List", "Index")
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Review answer", "AddReview", "Answers", new { answerId = Model.Id }, null)
+                    }
+                    @if (Model.Reviews != null && Model.Reviews.Count() > 0)
+                    {
+                        <h4>
+                            Đánh giá - Nhận xét
+                        </h4>
+                        @Html.Partial("_AnswerReviews", Model.Reviews)
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    @if (ViewBag.AnswersInQuestion != null)
+    {
+        <section class="sidebar">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Có  (@ViewBag.CountOfFiles) Bài giải/trả lời khác
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("_Answers", (IEnumerable<Mvc5.CafeT.vn.Models.AnswerModel>)ViewBag.AnswersInQuestion)
+                </div>
+                <div class="panel-footer">
+                    @*@Html.ActionLink("Xem thêm", "Index", "FileModels")*@
+                </div>
+            </div>
+        </section>
+    }
+</div>

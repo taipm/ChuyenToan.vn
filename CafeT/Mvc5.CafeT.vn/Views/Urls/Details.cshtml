@@ -1,0 +1,45 @@
+﻿@model Mvc5.CafeT.vn.Models.UrlModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WebPageModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        @*<dd>
+            @Html.Raw(Model.Page.Smart.TextContent)
+        </dd>*@
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", "Urls", new { id = Model.Id }, null) |
+    @Html.ActionLink("Save as WebPage", "Create", "WebPage", new { url = Model.Url }, null) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

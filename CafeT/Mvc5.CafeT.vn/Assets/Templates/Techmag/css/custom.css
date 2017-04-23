@@ -1,0 +1,67 @@
+/**********************************
+    File Name: custom.css
+    Template Name: TechMag
+    Created By: Template Visual Team
+    Website: http://templatevisual.com
+    Version: 1.0
+    Support: support@templatevisual.com
+
+/**********************************/
+
+.navbar-default,
+.label-primary,
+.reviewbox h3,
+.progress-bar,
+.tags a,
+.btn-primary,
+div.bbp-template-notice.info,
+div.bbp-template-notice.info p,
+.header,
+.random-article,
+.type,
+.status,
+.flex-direction-nav a,
+#bbpress-forums li.bbp-header,
+.pagination > li > a,
+.pagination > li > span,
+.large-widget .large-widget-title:hover a,
+.mini-widget .post:hover a,
+.post-review:hover h3 a,
+.widget-title hr:before {
+    background-color: #0288d1 !important;
+    border-color: #0288d1 !important;
+    color: #ffffff !important;
+}
+
+a,
+.page-404-content h2,
+.sitemapwrapper li:hover a,
+.news-ticker span,
+.footer .check li:hover a,
+#sitefooter a:hover,
+.sociallinks li:hover a,
+#sitefooter a:focus,
+.widget-title a,
+.post-share .fa-share-alt {
+    color: #0288d1;
+}
+
+a:hover,
+a:focus {
+    color: #0080c9;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+div.bbp-template-notice,
+div.indicator-hint,
+div.bbp-template-notice p,
+.tags a:hover,
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0080c9 !important;
+    border-color: #0080c9 !important;
+    color: #ffffff !important;
+}

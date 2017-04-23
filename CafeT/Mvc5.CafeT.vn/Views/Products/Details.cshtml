@@ -1,0 +1,47 @@
+﻿@model Mvc5.CafeT.vn.Models.ProductModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="col-md-8">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    @Html.Raw(Model.Name)
+                </h4>
+                <span>Price : @Html.Raw(Model.Price) </span>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.Description)
+
+                @{
+                    var _text = Model.Description.HtmlToText().ToSmartText();
+                    _text.ToLatex();
+                    @Html.Raw(_text.OutputText)
+                }
+            </div>
+            <div class="panel-footer">
+                @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+                {
+                    @Html.ActionLink("Edit", "Edit", "Products", new { id = Model.Id }, null)
+                    @Html.Raw(" | ")
+                }
+
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-4">
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Create", "Create", "Products")
+        if (User.Identity.Name == Model.CreatedBy)
+        {
+            @Html.Raw(" | ")
+            @Html.ActionLink("Edit", "Edit", "Products", new { id = Model.Id }, null)
+        }
+    }
+</div>

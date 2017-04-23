@@ -1,0 +1,200 @@
+﻿@model Mvc5.CafeT.vn.Models.FileModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FileModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountDownloads)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountDownloads)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeToString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeToString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Root)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Root)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Folder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Folder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Extension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Extension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeInB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeInB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeInKB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeInKB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeInMb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeInMb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SizeInGb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SizeInGb)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

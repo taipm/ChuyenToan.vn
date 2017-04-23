@@ -1,0 +1,45 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+@if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.CreatedBy)||(User.IsInRole("Admin")))
+{
+    @Html.ActionLink("Sửa", "Edit", "Articles", new { id = Model.Id }, null)
+    @Html.Raw(" | ")
+    @Html.ActionLink("Xóa", "Delete", "Articles", new { id = Model.Id }, null)
+
+    if (Model.IsDrafted)
+    {
+        @Html.Raw("| Bài nháp")
+        @Ajax.ActionLink(" | Xuất bản", "ToPublish", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+
+    if (Model.IsPublished)
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Lưu (nháp)", "ToDraft", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+    if (!Model.IsPublic)
+    {
+        @Html.Raw(" | ")
+        @Ajax.ActionLink("Công khai", "ToPublic", "Articles", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    }
+
+    <div id="Update-@Model.Id.ToString()"> </div>
+}

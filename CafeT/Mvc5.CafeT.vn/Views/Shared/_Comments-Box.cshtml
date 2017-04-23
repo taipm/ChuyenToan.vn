@@ -1,0 +1,30 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model IEnumerable<Mvc5.CafeT.vn.Models.CommentModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+        //if(!string.IsNullOrWhiteSpace(item.AvatarPath))
+        //{
+        //    imageUrl = item.AvatarPath;
+        //}
+        string title = item.Title;
+        if (title.Length > 100)
+        {
+            title = title.Substring(0, 100) + " ...";
+        }
+
+        <div class="post clearfix">
+            <div class="mini-widget-thumb">
+                <a href="/Comments/Details/@item.Id">
+                    <img alt="" src="@imageUrl" class="img-responsive">
+                </a>
+            </div>
+            <div class="mini-widget-title">
+                <a href="/Comments/Details/@item.Id"> @title</a>                                
+            </div>
+        </div>
+    }
+}

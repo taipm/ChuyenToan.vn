@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.ModelViews.ArticleView>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            <h4>
+                <b>
+                    @Html.ActionLink(item.Title, "Details", "Articles", new { id = item.Id }, null)
+                </b>
+
+                @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
+                {
+                    <span class="label label-danger">Mới</span>
+                }
+                else if (item.CreatedDate.AddDays(3) >= DateTime.Now)
+                {
+                    <span class="label label-danger">Mới</span>
+                }
+            </h4>
+            <p>
+                @Html.Partial("_ArticleInfo", item)
+            </p>
+            
+            @if (!item.Content.IsNullOrEmptyOrWhiteSpace() && item.Content.ExtractImages() != null && item.Content.ExtractImages().Count() > 0)
+            {
+                <p>
+                    <img src="@item.Content.ExtractUrlsWithoutHref().FirstOrDefault().Replace("</p","")" alt="" style="width: 100%; height: 50%;" class="img-responsive" />
+                </p>
+            }
+            <p>
+                @Html.Partial("_ArticleMenu", item)
+            </p>
+            
+            @if (!item.Summary.IsNullOrEmptyOrWhiteSpace())
+            {
+                <p>
+                    @Html.Raw(item.Summary)
+                </p>
+            }
+
+            <span>
+                
+                @if (!item.Tags.IsNullOrEmptyOrWhiteSpace())
+                {
+                    @Html.Raw("Từ khóa: ")
+                    foreach (string _tag in item.Tags.Split(new string[] { ",", ";" }, StringSplitOptions.None))
+                    {
+                        if (!_tag.IsNullOrEmptyOrWhiteSpace() && _tag.HasLetter())
+                        {
+                            @Html.ActionLink(_tag, "Search", "Articles", new { searchString = _tag }, null) @Html.Raw(";")
+                        }
+                    }
+                }
+
+            </span>
+            <br />
+            <span>
+                @Html.Raw("Tài liệu: " + item.Files.Count())
+                @Html.Raw(" | ")
+                @Html.Raw("Số từ: " + item.Content.GetCountWords())
+                @Html.Raw(" | Thảo luận: " + item.Comments.Count)
+            </span>
+        </li>
+    }
+</ul>
+Trang 
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 
+@Html.Raw(" / ") 
+@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", "Articles", new { page }, null))

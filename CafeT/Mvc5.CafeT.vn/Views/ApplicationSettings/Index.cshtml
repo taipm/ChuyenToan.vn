@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ApplicationSetting>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PathLogo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Metas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadFolder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbServerIp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbInstanceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailSmtp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailPort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailEnableSSL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PathLogo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Metas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadFolder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbServerIp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbInstanceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailSmtp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailPort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailEnableSSL)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

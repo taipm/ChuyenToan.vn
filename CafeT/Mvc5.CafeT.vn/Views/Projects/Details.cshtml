@@ -1,0 +1,89 @@
+﻿@model Mvc5.CafeT.vn.Models.ProjectModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="module-chapters clearfix">
+    <div class="row">
+        @Html.Partial("_Articles", Model.Articles)
+    </div>
+    <div class="row">
+        @Html.Partial("_Files", Model.Files)
+    </div>
+</div>
+
+<div class="col-right-learn">
+    <div class="row">
+        <div class="article-title h3">@Html.Raw(Model.Name)</div>
+        <h6 class="details text-right">
+            @Html.Raw("Created: " + Model.CreatedDate) @Html.Raw(" By: " + Model.CreatedBy)
+            <br />
+            @Html.Raw("Updated: " + Model.LastUpdatedDate)
+        </h6>
+        <div class="note">
+            @if (Model.Description != null && Model.Description.Length > 1)
+            {
+                <h5 class="text-primary">
+                    @Html.Raw(Model.Description)
+                </h5>
+            }
+        </div>
+    </div>
+   
+    <div class="row">
+        @Ajax.ActionLink("Articles (" + Model.Articles.Count + ")", "GetArticles", "Projects", new { id = Model.Id },
+        new AjaxOptions
+        {
+            UpdateTargetId = "AjaxUpdate",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "Get"
+        }, null)
+        @Ajax.ActionLink("Content", "GetContent", "Articles", new { articleId = Model.Id },
+        new AjaxOptions
+        {
+            UpdateTargetId = "AjaxUpdate",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "Get"
+        }, null)
+        @Ajax.ActionLink("Add Article", "AddArticle", "Projects", new { projectId = Model.Id },
+        new AjaxOptions
+        {
+            UpdateTargetId = "AjaxUpdate",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "Get"
+        }, null)
+    </div>
+   
+    <div id="AjaxUpdate" class="row">
+        @Html.Raw(Model.Description)
+    </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <p>
+        @using (Html.BeginForm("AddFile", "Projects", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <fieldset>
+                <legend>Upload a file</legend>
+                <div class="editor-field">
+                    @Html.TextBox("file", "", new { type = "file" })
+                </div>
+                <div class="editor-field">
+                    <input type="submit" value="Upload" />
+                </div>
+            </fieldset>
+        }
+    </p>
+    
+    @*@Html.Partial("_AddQuestion", Model.QuestionCreate)
+
+    @Html.Partial("_AddComment", Model.Comment)*@
+    
+
+</div>

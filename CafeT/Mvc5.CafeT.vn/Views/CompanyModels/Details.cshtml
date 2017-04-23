@@ -1,0 +1,60 @@
+﻿@model Mvc5.CafeT.vn.Models.CompanyModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div>
+    <h4>@Html.Raw(Model.Name)</h4>
+    <span>
+        @Html.Raw("Tạo bởi: " + Model.CreatedBy)
+        @Html.Raw(" | Lúc")
+        @Html.Raw(Model.CreatedDate)
+        @Html.Raw(" | Cập nhật bởi: ")
+        @Html.Raw(Model.LastUpdatedBy)
+        @Html.Raw(" | Lúc: ")
+        @Html.Raw(Model.LastUpdatedDate)
+        @Html.Raw(" | Địa chỉ: ")
+        @Html.Raw(Model.Address.Number)
+        @Html.Raw(" | Website: ")
+        @Html.Raw(Model.Website)
+        @Html.Raw(" | Đường: ")
+        @Html.Raw(Model.Address.Street)
+        @Html.Raw(" | Phone: ")
+        @Html.Raw(Model.Phone)
+        @Html.Raw(" | Fax: ")
+        @Html.Raw(Model.Fax)
+        @Html.Raw(" | Đã xem: ")
+        @Html.Raw(Model.CountViews)
+    </span>
+    <hr />
+    <p class="panel-body">
+        @Html.Raw(Model.Introduction)
+    </p>
+    
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.Raw("|")
+        @Ajax.ActionLink("Add Job", "AddJob", "CompanyModels", new { companyId = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "AjaxUpdate",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+        @Html.Raw("|")
+    }
+    @Ajax.ActionLink("Jobs", "GetJobs", "CompanyModels", new { companyId = Model.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "AjaxUpdate",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Get"
+                        }, null)
+    @Html.Raw("|")
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div id="AjaxUpdate"></div>

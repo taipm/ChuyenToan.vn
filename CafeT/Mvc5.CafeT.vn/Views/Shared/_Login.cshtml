@@ -1,0 +1,35 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model Mvc5.CafeT.vn.Models.LoginViewModel
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h3>Đăng nhập</h3>
+    <hr>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @name = "access_email", @id = "access_email", @placeholder = "Email", @tabindex = "3" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @type = "password", @name = "password", @id = "password", @placeholder = "Mật khẩu", @tabindex = "4" })
+    </div>
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-control", @type = "checkbox" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Bạn có phải là Bot không ?", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.MathCaptcha()
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-16">
+            <input type="submit" value="Đăng nhập" class="btn btn-danger btn-block btn-lg" tabindex="7">
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Đăng ký tài khoản mới?", "Register")
+    </p>
+    <p>
+        @Html.ActionLink("Quên mật khẩu ?", "ForgotPassword")
+    </p>
+}

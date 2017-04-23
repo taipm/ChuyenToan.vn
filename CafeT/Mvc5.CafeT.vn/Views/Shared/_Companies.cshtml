@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.CompanyModel>
+
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.Name, "Details", "CompanyModels", new { id = item.Id }, null)<br />
+            @*<span>
+                    @Html.Raw("Downloads: " + item.CountDownloads) |
+                    @Html.Raw(item.GetSizeAsString()) | @Html.Raw(item.CreatedDate.ToShortDateString())
+                </span>*@
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "CompanyModels", new { id = item.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "CompanyModels", new { id = item.Id }, null)
+            }
+        </li>
+    }
+</ul>
+

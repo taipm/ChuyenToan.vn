@@ -1,0 +1,110 @@
+﻿@model Mvc5.CafeT.vn.Models.FileModel
+
+@{
+    ViewBag.Title = "Cập nhật tài liệu";
+    string avartarUrl = "/Assets/Customizes/images/article_default.jpg";
+    if (Model != null)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.AvatarPath))
+        {
+            avartarUrl = Model.AvatarPath;
+        }
+    }
+}
+
+<link href="~/Content/avatar/imgareaselect-default.css" rel="stylesheet" />
+<link href="~/Content/avatar/jquery.awesome-cropper.css" rel="stylesheet" />
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Cập nhật tài liệu</h4>
+            <hr>
+        </div><!-- end widget-title -->
+        <div class="review-posts row m30">
+            <div class="post-review col-md-12 col-sm-12 col-xs-12">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-horizontal">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextArea("Description", new { @id = "Description" })
+                                <script>
+                                    CKEDITOR.replace('Description');
+                                </script>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvatarPath, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.AvatarPath, new { htmlAttributes = new { @class = "form-control", @id = "avatarPath", @readOnly = true } })
+                                @Html.ValidationMessageFor(model => model.AvatarPath, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvatarPath, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <a href="javascript:void(0);">
+                                    <img class="media-object" width="200" height="115" id="url-avatar" alt="..." src="@avartarUrl" />
+                                </a>
+                                <input id="imageBase" type="hidden" name="imageBase">
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Đăng</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+                    @Html.ActionLink("Quay lại", "Index")
+                </div>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->
+
+<script src="~/Scripts/avatar/jquery.imgareaselect.js"></script>
+<script src="~/Scripts/avatar/jquery.awesome-cropper.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#imageBase').awesomeCropper(
+        { width: 300, height: 400, debug: true }
+        );
+    });
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

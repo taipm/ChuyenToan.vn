@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.CommentView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="widget searchwidget indexslider">
+    @Html.Partial("_Comments-Items", Model)
+</div>

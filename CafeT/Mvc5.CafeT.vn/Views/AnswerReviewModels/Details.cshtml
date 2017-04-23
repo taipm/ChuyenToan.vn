@@ -1,0 +1,66 @@
+﻿@model Mvc5.CafeT.vn.Models.AnswerReviewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AnswerReviewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCorrect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCorrect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

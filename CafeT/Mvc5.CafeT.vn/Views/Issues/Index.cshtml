@@ -1,0 +1,181 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.IssueModel>
+@using Mvc5.CafeT.vn.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="col-md-4">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Tìm kiếm
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Index", "Issues", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+            {
+                @Html.TextBox("searchString", null, new { id = "Search" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+            }
+        </div>
+        <div class="panel-footer">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Create", "Create", "Issues", new { @class = "btn btn-success" })
+            }
+        </div>
+    </div>
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Đang xử lý
+                </h4>
+                <span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("My drafts", "GetAllDrafted", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My published", "GetAllPublished", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My articles", "GetAll", "Issues", new { @class = "btn btn-success" })
+                    }
+                </span>
+            </div>
+            <div class="panel-body">
+                @Html.Partial("_Issues", (IEnumerable<IssueModel>)ViewBag.TodayTasks)
+                <div id="Issues">
+                    
+                </div>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-4">
+    
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Đang xử lý
+                </h4>
+                <span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("My drafts", "GetAllDrafted", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My published", "GetAllPublished", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My articles", "GetAll", "Issues", new { @class = "btn btn-success" })
+                    }
+                </span>
+            </div>
+            <div class="panel-body">
+                <div id="Issues">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        <ul class="style1">
+                            @foreach (var item in Model)
+                            {
+                                <li>
+                                    @Html.ActionLink(item.Title, "Details", "Issues", new { id = item.Id }, null)
+                                    <br />
+                                    <span>
+                                        @Html.Raw("Tạo bởi: " + item.CreatedBy)
+                                        @Html.Raw(" lúc: " + item.CreatedDate.ToShortDateString())
+                                        @if (!item.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+                                        {
+                                            @Html.Raw("Cập nhật bởi: " + item.LastUpdatedBy)
+                                            @Html.Raw(" lúc: " + item.LastUpdatedDate.Value.ToShortDateString())
+                                        }
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="panel-footer">
+                @*@Html.Partial("_Customers", ViewBag.Customers)*@
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-4">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Quá hạn
+                </h4>
+                <span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("My drafts", "GetAllDrafted", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My published", "GetAllPublished", "Issues", new { @class = "btn btn-success" })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("My articles", "GetAll", "Issues", new { @class = "btn btn-success" })
+                    }
+                </span>
+            </div>
+            <div class="panel-body">
+                <div id="Issues">
+                    @if (Model != null && Model.Where(t=>t.IsOverdued()).Count() > 0)
+                    {
+                        <ul class="style1">
+                            @foreach (var item in Model)
+                            {
+                                <li>
+                                    @Html.ActionLink(item.Title, "Details", "Issues", new { id = item.Id }, null)
+                                    <br />
+                                    <span>
+                                        @Html.Raw("Tạo bởi: " + item.CreatedBy)
+                                        @Html.Raw(" lúc: " + item.CreatedDate.ToShortDateString())
+                                        @if (!item.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+                                        {
+                                            @Html.Raw("Cập nhật bởi: " + item.LastUpdatedBy)
+                                            @Html.Raw(" lúc: " + item.LastUpdatedDate.Value.ToShortDateString())
+                                        }
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="panel-footer">
+                @*@Html.Partial("_Customers", ViewBag.Customers)*@
+            </div>
+        </div>
+    </section>
+    
+    <div id="searchResults">
+        @if (Model != null && Model.Count() > 0)
+            {
+            <ul class="style1">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        @Html.ActionLink(item.Title, "Details", "Issues", new { id = item.Id }, null)
+                        <br />
+                        <span>
+                            @Html.Raw("Tạo bởi: " + item.CreatedBy)
+                            @Html.Raw(" lúc: " + item.CreatedDate.ToShortDateString())
+                            @if (!item.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+                            {
+                                @Html.Raw("Cập nhật bởi: " + item.LastUpdatedBy)
+                                @Html.Raw(" lúc: " + item.LastUpdatedDate.Value.ToShortDateString())
+                            }
+                        </span>
+                    </li>
+                }
+            </ul>
+        }
+
+    </div>
+</div>
+

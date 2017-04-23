@@ -1,0 +1,51 @@
+﻿
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">Home</a></li>
+    <li role="presentation"><a href="#">Profile</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+
+<ul class="nav nav-pills nav-stacked">
+    <li>
+        @Ajax.ActionLink("Add Crawler", "Create", "CrawlerModels", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    </li>
+    <li>
+        @Ajax.ActionLink("Crawlers", "Index", "CrawlerModels", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    </li>
+    <li>
+        @Ajax.ActionLink("Urls", "Index", "Urls", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    </li>
+    <li>
+        @Ajax.ActionLink("Webpages", "Index", "WebPage", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+    </li>    
+    <li>@Html.ActionLink("Menus", "Index", "MenuModels")</li>
+    <li>@Html.ActionLink("MenuItems", "Index", "MenuItemModels")</li>
+    <li>@Html.ActionLink("Article Category", "Index", "ArticleCategories")</li>
+    <li>@Html.ActionLink("Curiculums", "Index", "Curiculums")</li>
+    <li>@Html.ActionLink("Jobs", "Index", "JobModels")</li>
+    <li>@Html.ActionLink("Exams", "Index", "Questions")</li>
+</ul>

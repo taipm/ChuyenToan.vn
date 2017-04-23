@@ -1,0 +1,171 @@
+﻿
+<div class="list-group">
+    <a href="javascript:void(0);" class="list-group-item active">
+        Tài khoản
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Cập nhật", "Edit", "Manage", new { userName = User.Identity.Name},
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Get"
+                            }, null)
+        </li>
+    </ul>
+    <a href="javascript:void(0);" class="list-group-item active">
+        Bài viết
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Đã xuất bản", "GetAllPublishedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.CountOfPublished</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Đang soạn", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.CountOfDrafted</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Chưa duyệt", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">@ViewBag.CountOfDrafted</span>
+        </li>
+    </ul>
+    
+    <a href="javascript:void(0);" class="list-group-item active">
+        Câu hỏi / Bài tập
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Đang soạn", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">14</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Đã xuất bản", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">14</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Chưa duyệt", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">14</span>
+        </li>
+    </ul>
+    <a href="javascript:void(0);" class="list-group-item active">
+        Issues
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Quá hạn", "GetAllOverdued", "Issues", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.IssuesOverdued</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Hôm nay", "GetAllToday", "Issues", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">@ViewBag.IssuesToday</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Ngày mai", "GetAllTomorrow", "Issues", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">@ViewBag.IssuesTomorrow</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Hôm qua", "GetAllYesterday", "Issues", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">@ViewBag.IssuesYesterday</span>
+        </li>
+    </ul>
+    <a href="javascript:void(0);" class="list-group-item active">
+        Hệ thống
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Webpages", "Index", "WebPage", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Đổi mật khẩu", "Index", "WebPage", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Webpages", "Index", "WebPage", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "Update",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }, null)
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Issues", "Index", "Issues", null)
+        </li>
+        <li class="list-group-item">
+            @Html.ActionLink("Curiculums", "Index", "Curiculums", null)
+        </li>
+    </ul>
+</div>

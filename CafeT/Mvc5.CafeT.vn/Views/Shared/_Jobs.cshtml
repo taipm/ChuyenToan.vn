@@ -1,0 +1,28 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model IEnumerable<Mvc5.CafeT.vn.Models.JobModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="style1">
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.Title, "Details", "JobModels", new { id = item.Id }, null)<br />
+                <span>
+                    @Html.Raw("Lương: " + item.SalaryInMoth) @Html.Raw(" / tháng")
+                    @if (item.CompanyId != null)
+                    {
+                        @Html.Raw(" | ")
+                        @Html.ActionLink(item.Company.Name, "Details", "CompanyModels", new { id = item.CompanyId }, null)
+                    }
+                    @Html.Raw(" | ")
+                    @Html.Raw("Đã xem: " + item.CountViews)
+                    @Html.Raw(" | Số lượng: ")
+                    @Html.Raw(item.Quantity)
+                </span>
+            </li>
+        }
+    </ul>
+}
+
+

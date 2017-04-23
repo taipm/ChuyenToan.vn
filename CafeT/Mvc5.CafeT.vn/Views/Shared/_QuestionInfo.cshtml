@@ -1,0 +1,28 @@
+﻿@model Mvc5.CafeT.vn.Models.QuestionModel
+
+@if (Model.LastUpdatedDate.HasValue)
+{
+    @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+}
+else
+{
+    @Html.Raw(Model.CreatedDate.ToShortDateString())
+}
+@if (!Model.HasAnswer())
+{
+    <div class="panel-danger">
+        Chưa có câu trả lời
+        @if(User.Identity.IsAuthenticated && User.Identity.Name != Model.CreatedBy)
+        {
+            @Html.Raw(". Bạn hãy là người đầu tiên ")
+            @Html.ActionLink("Trả lời", "AddAnswer", "Questions", new { id = Model.Id }, null)
+        }
+    </div>
+}
+else
+{
+    <div class="panel-info">
+        @Html.Raw(" | Có: " + Model.Answers.Count() + " trả lời")
+    </div>
+    
+}

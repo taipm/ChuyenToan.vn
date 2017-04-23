@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<Mvc5.CafeT.vn.Models.UrlModel>
+
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @*@Html.ActionLink(item.Name, "Details", "UrlModels", new { url = item.Url }, null)*@
+            <a href="@item.Url">@item.Name</a>
+        </li>
+    }
+</ul>

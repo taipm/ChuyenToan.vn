@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ArticleModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="note">
+            @Html.ActionLink(item.Title, "Details", "Articles", new { id = item.Id }, null)
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "Articles", new { id = item.Id }, null) @Html.Raw("|")
+                @Html.ActionLink("Delete", "Delete", "Articles", new { id = item.Id }, null)
+            }
+        </div>
+        @Html.Raw(item.Summary)<br />
+        @Html.Raw("Comments: " + item.Comments.Count)
+    </div>
+}
+

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.CommentModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string avatarUrl = "/Assets/Customizes/images/avatar_default.png";
+
+        <div class="media">
+            <div class="media-left">
+                <a href="javascript:void(0);">
+                    <img class="media-object img-circle" src="@avatarUrl" alt="Generic placeholder image">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">@item.Title</h4>
+                <div class="time-comment clearfix">
+                    <small class="pull-left">@Html.ActionLink(@item.CreatedBy, "Details", "ApplicationUsers", new { userName = @item.CreatedBy }, htmlAttributes: new { title = "Thông tin thành viên", @class = "authorlink" }) <small>&#124;</small> @item.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</small>
+                    <a class="pull-right btn btn-primary btn-xs">Trả lời</a>
+                </div><!-- end time-comment -->
+                <p>@Html.Raw(item.Content)</p>
+            </div>
+        </div>
+    }
+}

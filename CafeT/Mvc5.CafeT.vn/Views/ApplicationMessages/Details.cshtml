@@ -1,0 +1,63 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationMessage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ApplicationMessage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountViews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountViews)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastViewAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastViewAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastViewBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastViewBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.Raw(" | ")
+    }
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

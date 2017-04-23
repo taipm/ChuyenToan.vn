@@ -1,0 +1,54 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model IEnumerable<Mvc5.CafeT.vn.Models.JobModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string imageUrl = "/Assets/Customizes/images/job_default.jpg";
+        if (!string.IsNullOrWhiteSpace(item.AvatarPath))
+        {
+            imageUrl = item.AvatarPath;
+        }
+        string start = "";
+        if (item.Start.HasValue)
+        {
+            start = DateTime.Now.Date.Subtract(item.Start.Value.Date).TotalDays + " ngày";
+        }
+        string end = "";
+        if (item.End.HasValue)
+        {
+            end = item.End.Value.Date.Subtract(item.Start.Value.Date).TotalDays + " ngày";
+        }
+
+        <div class="large-widget m30">
+            <div class="post row clearfix">
+                <div class="col-md-4">
+                    <div class="post-media">
+                        <a href="/tuyen-dung/@item.Id">
+                            <img alt="" src="@imageUrl" class="img-responsive">
+                        </a>
+                        <a href="#appljpob" class="btn btn-primary btn-block"><i class="fa fa-check"></i> Ứng tuyển</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="title-area">
+                        <div class="colorfulcats">
+                            <a href="javascript:void(0);"><span class="label label-primary">Full time</span></a>
+                        </div>
+                        <a href="/tuyen-dung/@item.Id"><h3>@item.Title</h3></a>
+                        <div class="job-details">
+                            <ul class="">
+                                <li><strong><i class="fa fa-user"></i> Người đăng :</strong> @Html.ActionLink(@item.CreatedBy, "Details", "ApplicationUsers", new { userName = @item.CreatedBy }, htmlAttributes: new { title = "Thông tin thành viên" })</li>
+                                <li><strong><i class="fa fa-briefcase"></i> Vị trí :</strong> <a href="javascript:void(0);"> Chưa xác định</a></li>
+                                <li><strong><i class="fa fa-dollar"></i> Lương :</strong> @string.Format("{0:0,0.00}", item.SalaryInMoth) VNĐ</li>
+                                <li><strong><i class="fa fa-clock-o"></i> Đã đăng :</strong> @start</li>
+                                <li><strong><i class="fa fa-cog"></i> Còn lại :</strong> @end</li>
+                            </ul>
+                        </div>
+                    </div><!-- /.pull-right -->
+                </div>
+            </div><!-- end post -->
+        </div><!-- end large-widget -->
+    }
+}

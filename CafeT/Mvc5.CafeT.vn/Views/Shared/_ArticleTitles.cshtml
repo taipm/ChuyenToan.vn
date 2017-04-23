@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.ArticleView>
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            <b>
+                @Html.ActionLink(item.Title, "Details", "Articles", new { id = item.Id }, null)
+            </b>
+            @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
+                {
+                <span class="label label-danger">Mới</span>
+            }
+            else if (item.CreatedDate.AddDays(3) >= DateTime.Now)
+            {
+                <span class="label label-danger">Mới</span>
+            }
+            <br />
+            @if (!item.Content.IsNullOrEmptyOrWhiteSpace() && item.Content.ExtractImages() != null && item.Content.ExtractImages().Count() > 0)
+            {
+                <p>
+                    <img src="@item.Content.ExtractUrlsWithoutHref().FirstOrDefault().Replace("</p","")" alt="" style="width: 500px; height: 150px;" class="img-responsive" />
+                </p>
+            }
+            <span>
+                @Html.Raw("Đăng bởi: " + item.CreatedBy)
+                @Html.Raw("Đăng lúc: " + item.CreatedDate.ToShortDateString())
+                @if (item.LastUpdatedDate.HasValue)
+                {
+                    @Html.Raw(" cập nhật: " + item.LastUpdatedDate.Value.ToShortDateString())
+                }
+                @Html.Raw(" | Đã xem: " + item.CountViews)
+            </span>
+        </li>
+    }
+</ul>

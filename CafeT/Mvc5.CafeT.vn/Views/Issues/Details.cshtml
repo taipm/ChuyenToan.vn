@@ -1,0 +1,103 @@
+﻿@model Mvc5.CafeT.vn.Models.IssueModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IssueModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExcuteBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExcuteBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VerifyBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VerifyBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFinished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFinished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDoing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDoing)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountViews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountViews)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+    {
+        @Html.ActionLink("Edit", "Edit", "Issues", new { id = Model.Id }, null)
+        @Html.Raw(" | ")
+        @Html.ActionLink("Back to List", "Index","Issues")
+    }
+    
+</p>

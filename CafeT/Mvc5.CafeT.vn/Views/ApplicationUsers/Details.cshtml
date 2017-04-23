@@ -1,0 +1,35 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="col-md-12">
+    <h4>
+        @Html.Raw(Model.LastName + " " + Model.FirstName)
+
+        @if (Model.Points != null)
+        {
+            <span class="badge"> @Html.Raw("Điểm: ") @Model.Points</span>
+        }
+    </h4>
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#">Bài viết <span class="badge">@ViewBag.CountOfPublished</span></a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+    </ul>
+    <hr />
+    @Html.Raw(Model.About)
+</div>
+<div class="col-md-3">
+    @Html.Partial("_UserArticles", Model)
+</div>
+<div class="col-md-3">
+    @Html.Partial("_UserIssues", Model)
+</div>
+<div class="col-md-3">
+    @Html.Partial("_UserQuestions", Model)
+</div>
+<div class="col-md-3">
+    @Html.Partial("_UserComments", Model)
+</div>

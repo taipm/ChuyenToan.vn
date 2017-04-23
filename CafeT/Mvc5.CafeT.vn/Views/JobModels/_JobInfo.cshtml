@@ -1,0 +1,37 @@
+﻿@model Mvc5.CafeT.vn.Models.JobModel
+
+<span>
+    @Html.Raw("Created by: " + Model.CreatedBy)
+    @Html.Raw(" | ")
+    @Html.Raw(Model.SalaryInMoth) @Html.Raw(" / tháng")
+    @*@if (ViewBag.Company != null)
+        {
+            @Html.Raw(" | ")
+            @Html.Raw(((CompanyModel)ViewBag.Company).Name)
+        }*@
+    @Html.Raw(" | ")
+    @Html.Raw("Views: " + Model.CountViews)
+    @Html.Raw(" | Số lượng: " + Model.Quantity)
+    
+    @if (Model.Start.HasValue)
+    {
+        @Html.Raw(" | Hiệu lực từ : ")
+        @Html.Raw(Model.Start.Value.ToShortDateString())
+    }
+    @if (Model.End.HasValue)
+    {
+       @Html.Raw(" đến: ")
+        @Html.Raw(Model.End.Value.ToShortDateString())
+    }
+
+    @if (Model.Questions != null && Model.Questions.Count() > 0)
+    {
+        @Ajax.ActionLink(" | Questions (" + Model.Questions.Count() + ")", "GetQuestions", "JobModels", new { jobId = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)
+    }
+</span>

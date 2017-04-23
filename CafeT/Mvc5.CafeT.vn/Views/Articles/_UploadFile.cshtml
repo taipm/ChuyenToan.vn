@@ -1,0 +1,17 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+@using (Html.BeginForm("UploadFileWithSplits", "FileModels", new { articleId = Model.Id},
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Upload a file</legend>
+        <div class="editor-field">
+            <input type="file" id="uploadFile" name="files" multiple="multiple" />
+        </div>
+        <div class="editor-field">
+            <input type="submit" value="Upload" />
+        </div>
+    </fieldset>
+}

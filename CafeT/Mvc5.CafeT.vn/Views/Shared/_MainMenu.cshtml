@@ -1,0 +1,111 @@
+﻿@using Mvc5.CafeT.vn.Models;
+
+@*<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Articles")</li>
+    <li>@Html.ActionLink("Tài liệu", "Index", "FileModels")</li>
+    <li>@Html.ActionLink("Việc làm", "Index", "WorkModels")</li>
+    <li>@Html.ActionLink("Câu hỏi", "Index", "Questions")</li>
+    <li>@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li>@Html.ActionLink("Issues", "Index", "Issues")</li>
+        if (User.Identity.Name == "taipm.vn@gmail.com" || User.Identity.Name == "taipm.vn@outlook.com")
+        {
+            <li>@Html.ActionLink("Settings", "Index", "ApplicationMessages")</li>
+            <li>@Html.ActionLink("Sản phẩm", "Index", "Products")</li>
+        }
+        <li>
+            @Html.ActionLink("Cá nhân","Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+    }
+</ul>
+<p>
+    @Html.Partial("_LoginPartial")
+</p>*@
+
+@if (ViewBag.Menus != null)
+{
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            @foreach (var menu in (IEnumerable<MenuModel>)ViewBag.Menus)
+            {
+                if (menu.Enable)
+                {
+                    <li class="hvr-bounce-to-bottom">@Html.ActionLink(menu.Name, menu.ActionName, menu.ControllerName)</li>
+                }
+            }
+            @*<li class="hvr-bounce-to-bottom active"><a href="index.html">Home</a></li>
+                <li class="hvr-bounce-to-bottom"><a href="about.html">About</a></li>
+                <li class="hvr-bounce-to-bottom"><a href="Portfolio.html">Portfolio</a></li>
+                <li class="hvr-bounce-to-bottom"><a href="Pages.html">Pages</a></li>
+                <li class="hvr-bounce-to-bottom"><a href="contact.html">Contact Us</a></li>*@
+        </ul>
+    </div><!-- /.navbar-collapse -->
+}
+else
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Articles")</li>
+        <li>@Html.ActionLink("Tài liệu", "Index", "FileModels")</li>
+        <li>@Html.ActionLink("Việc làm", "Index", "WorkModels")</li>
+        <li>@Html.ActionLink("Câu hỏi", "Index", "Questions")</li>
+        <li>@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("Issues", "Index", "Issues")</li>
+            if (User.Identity.Name == "taipm.vn@gmail.com" || User.Identity.Name == "taipm.vn@outlook.com")
+            {
+                <li>@Html.ActionLink("Settings", "Index", "ApplicationMessages")</li>
+                <li>@Html.ActionLink("Sản phẩm", "Index", "Products")</li>
+            }
+            <li>
+                @Html.ActionLink("Cá nhân", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+        }
+    </ul>
+    <p>
+        @Html.Partial("_LoginPartial")
+    </p>
+}
+
+@*@if (ViewBag.Menus != null)
+{
+    <ul class="nav navbar-nav">
+        @foreach (var menu in (IEnumerable<MenuModel>)ViewBag.Menus)
+        {
+            if (menu.Enable)
+            {
+                <li>@Html.ActionLink(menu.Name, menu.ActionName, menu.ControllerName)</li>
+            }
+        }
+    </ul>
+    <p>
+        @Html.Partial("_LoginPartial")
+    </p>
+}
+else
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Articles")</li>
+        <li>@Html.ActionLink("Tài liệu", "Index", "FileModels")</li>
+        <li>@Html.ActionLink("Việc làm", "Index", "WorkModels")</li>
+        <li>@Html.ActionLink("Câu hỏi", "Index", "Questions")</li>
+        <li>@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("Issues", "Index", "Issues")</li>
+            if (User.Identity.Name == "taipm.vn@gmail.com" || User.Identity.Name == "taipm.vn@outlook.com")
+            {
+                <li>@Html.ActionLink("Settings", "Index", "ApplicationMessages")</li>
+                <li>@Html.ActionLink("Sản phẩm", "Index", "Products")</li>
+            }
+            <li>
+                @Html.ActionLink("Cá nhân", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+        }
+    </ul>
+    <p>
+        @Html.Partial("_LoginPartial")
+    </p>
+}*@

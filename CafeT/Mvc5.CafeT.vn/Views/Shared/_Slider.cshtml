@@ -1,0 +1,40 @@
+﻿@model IEnumerable< Mvc5.CafeT.vn.Models.SliderModel>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="../assets/bjqs.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../assets/demo.css">
+    <script src="../assets/js/bjqs-1.3.min.js"></script>
+    <script src="../assets/js/libs/jquery.secret-source.min.js"></script>
+    <script>
+            jQuery(function ($) {
+
+                $('.secret-source').secretSource({
+                    includeTag: false
+                });
+
+                $('#banner-fade').bjqs({
+                    height: 320,
+                    width: 620,
+                    responsive: true
+                });
+            });
+    </script>
+</head>
+<div id="banner-fade">
+            <ul class="bjqs">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src='@Html.DisplayFor(modelItem => item.Src)'
+                             title='@Html.DisplayFor(modelItem => item.Title)' alt="">
+                    </li>
+                    <li class="col-md-6">
+                        @Html.Raw(item.Description)
+                    </li>
+                }
+            </ul>
+        </div>

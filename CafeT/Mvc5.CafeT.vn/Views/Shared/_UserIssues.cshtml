@@ -1,0 +1,39 @@
+﻿
+<div class="list-group">
+    
+    <a href="#" class="list-group-item active">
+        Issues
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            @Ajax.ActionLink("Issues (Đang soạn)", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">14</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Issues (Đã xuất bản)", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge">14</span>
+        </li>
+        <li class="list-group-item">
+            @Ajax.ActionLink("Issues (Chưa duyệt)", "GetAllDraftedByUser", "Articles", null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "Update",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "Post"
+                            }, null)
+            <span class="badge bg-danger">14</span>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,7 @@
+﻿@model string
+
+Followers:
+@foreach (string _tag in Model.Split(new string[] { ",", ";" }, StringSplitOptions.None))
+{
+    @Html.ActionLink(_tag, "Search", "Articles", new { searchString = _tag }, null) @Html.Raw(";")
+}

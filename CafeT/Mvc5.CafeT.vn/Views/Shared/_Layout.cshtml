@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- SITE META -->
+    <title>@ViewBag.Title - ChuyenToan.vn</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="~/Assets/Templates/Techmag/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/Assets/Templates/Techmag/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Assets/Templates/Techmag/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Assets/Templates/Techmag/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Assets/Templates/Techmag/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Assets/Templates/Techmag/images/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Assets/Templates/Techmag/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Assets/Templates/Techmag/images/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Assets/Templates/Techmag/images/apple-touch-icon-152x152.png">
+    <!-- TEMPLATE STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/bbpress.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/style.css">
+    <!-- CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/Templates/Techmag/css/custom.css">
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!--Start My script-->
+    @RenderSection("Styles", false)
+    @Scripts.Render("~/bundles/jquery")
+	<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <!--End My Script-->
+</head>
+<body>
+    @RenderPage("~/Views/Shared/Templates/_Social.cshtml")
+    <!-- START SITE -->
+    <div id="wrapper">
+        @RenderPage("~/Views/Shared/Templates/_Top.cshtml")
+        <!-- end logo-wrapper -->
+        @RenderPage("~/Views/Shared/Templates/_Menu.cshtml")
+        <!-- end header -->
+
+        <div class="container sitecontainer bgw">
+            @RenderPage("~/Views/Shared/Templates/_AdsNews.cshtml")
+            <div class="row">
+                <!--body-->
+                <div class="col-md-9 col-sm-12 col-xs-12" style="padding: 0!important;">
+                    @RenderBody()
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    @RenderPage("~/Views/Shared/Templates/_Left.cshtml")
+                </div>
+            </div><!-- end row -->
+        </div><!-- end container -->
+        @RenderPage("~/Views/Shared/Templates/_Footer.cshtml")
+    </div><!-- end wrapper -->
+    <!-- END SITE -->
+    @*<script src="~/Assets/Templates/Techmag/js/jquery.min.js"></script>*@
+    <script src="~/Assets/Templates/Techmag/js/bootstrap.js"></script>
+    <script src="~/Assets/Templates/Techmag/js/plugins.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+        });
+    </script>
+    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+    <!--Page facebook-->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=378488572315838";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!--Share Google-->
+    <script type="text/javascript">
+            window.___gcfg = { lang: 'vi' };
+            (function () {
+                var po = document.createElement('script'); po.type = 'text/javascript';
+                po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0];
+               s.parentNode.insertBefore(po, s);
+            })();
+    </script>
+
+    <!--Left Jobs-->
+    <script type="text/javascript">
+        $.get('@Url.Action("TopJobs", "JobModels", null )', function (data) {
+            $('#jobs-box').html(data);
+        });
+    </script>
+    <!--Left Jobs-->
+    <script type="text/javascript">
+        $.get('@Url.Action("TopComments", "Comments", null )', function (data) {
+            $('#comments-box').html(data);
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

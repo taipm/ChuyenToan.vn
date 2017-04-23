@@ -1,0 +1,110 @@
+﻿@model Mvc5.CafeT.vn.Models.WebPageModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div class="col-md-3">
+    @{
+        var _html1 = new SmartHtml(Model.HtmlContent);
+        if (_html1.Nodes != null && _html1.Nodes.Count() > 0)
+        {
+            foreach (var node in _html1.Nodes.Select(t => t.ToSmart()))
+            {
+                foreach (var id in node.Ids)
+                {
+                    foreach (var item in id.Attributes.Distinct())
+                    {
+                        @Html.Raw("Name: " + item.Name)
+                        @Html.Raw(" - Value: " + item.Value)
+                        <br />
+                    }
+                    <hr />
+                }
+                <hr />
+            }
+        }
+    }
+</div>
+<div class="col-md-9">
+    <h4>WebPage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meta)
+        </dd>
+
+        <dt>
+            @Html.Raw("HtmlContent")
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.HtmlContent)
+        </dd>
+        @*<dd>
+                @{
+                    var _html = new SmartHtml(Model.HtmlContent);
+                    foreach (var node in _html.Nodes.Select(t => t.ToSmart()))
+                    {
+                        foreach (var id in node.Ids)
+                        {
+                            if (id.InnerText.GetCountWords() > 100)
+                            {
+                                @Html.Raw(id.ToFullString())<br />
+
+                                }
+                            }
+                        }
+                    }
+            </dd>*@
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

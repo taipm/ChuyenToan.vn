@@ -1,0 +1,138 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationSetting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ApplicationSetting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathLogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathLogo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Metas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Metas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadFolder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadFolder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbServerIp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbServerIp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbInstanceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbInstanceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailSmtp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailSmtp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailEnableSSL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailEnableSSL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,40 @@
+﻿@model Mvc5.CafeT.vn.Models.IndexViewModel
+@using Mvc5.CafeT.vn.Models;
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Quản lý tài khoản</h4>
+            <hr>
+        </div>
+        <div class="review-posts row m30">
+            <p class="text-success">@ViewBag.StatusMessage</p>
+
+            <div class="col-md-3">
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    @Html.Partial("_AdminMenu")
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.Partial("_UserMenu")
+                }
+            </div>
+
+            <div class="col-md-9">
+                <div class="container-fluid">
+                    @Html.Partial("_UserProfile", (ApplicationUser)ViewBag.User)
+                </div>
+                <div id="Update" class="container-fluid">
+                    <h4>Thông tin tài khoản</h4>
+                    <hr />
+                    @Html.Partial("_UserInformation", (ApplicationUser)ViewBag.User)
+                </div>
+            </div>
+        </div><!-- end review-post -->
+    </div><!-- end widget -->
+</div><!-- end col -->

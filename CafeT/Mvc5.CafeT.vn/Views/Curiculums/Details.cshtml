@@ -1,0 +1,36 @@
+﻿@model Mvc5.CafeT.vn.Models.CuriculumModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="col-md-4"></div>
+<div class="col-md-8">
+    @Html.DisplayNameFor(model => model.UserId)
+    @Html.DisplayFor(model => model.UserId)
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Raw(Model.Email) @Html.Raw(" | ")
+        @Html.Raw(Model.Phone)
+    }
+    else
+    {
+        <p>
+            Bạn phải đăng nhập mới có thể xem thông tin liên lạc
+        </p>
+            @*@Html.Partial("_Secu")*@
+    }
+    <p>
+        @Html.Raw(Model.Content)
+        
+    </p>
+    
+    @Html.DisplayNameFor(model => model.CountViews)
+    @Html.DisplayFor(model => model.CountViews)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

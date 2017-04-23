@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ProjectModel>
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.Name, "Details", "Projects", new { id = item.Id }, null)<br />
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "Projects", new { id = item.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "Projects", new { id = item.Id }, null)
+            }
+        </li>
+    }
+</ul>

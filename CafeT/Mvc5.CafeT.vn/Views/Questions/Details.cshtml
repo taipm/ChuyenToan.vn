@@ -1,0 +1,136 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model Mvc5.CafeT.vn.Models.QuestionModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<script>
+    var dt = '@ViewBag.EndDate';
+    var dateAr = dt.split('-');
+    var newDate = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+
+    var end = new Date(dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2]);
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'EXPIRED!';
+            window.location.href = '/Account/Login';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+        //document.getElementById('countdown').innerHTML = days + 'days ';
+        document.getElementById('countdown').innerHTML = hours + 'hrs ';
+        document.getElementById('countdown').innerHTML += minutes + 'mins ';
+        document.getElementById('countdown').innerHTML += seconds + 'secs';
+    }
+    //if()
+    //{
+
+    //}
+    timer = setInterval(showRemaining, 1000);
+</script>
+
+<div class="col-md-4">
+    <h4>@Html.Raw(Model.Title)</h4>
+    <hr />
+    <div class="float-left">
+        <h4 id="countdown"></h4>
+    </div>
+    <span>
+
+        @Html.Raw("Tạo bởi: " + Model.CreatedBy)
+        @Html.Raw(" | ")
+        @Html.Raw("lúc: " + Model.CreatedDate.ToShortDateString())
+        @if (!Model.LastUpdatedBy.IsNullOrEmptyOrWhiteSpace())
+        {
+            @Html.Raw("Cập nhật bởi: " + Model.LastUpdatedBy)
+            @Html.Raw(" | ")
+            @Html.Raw("lúc: " + Model.LastUpdatedDate)
+        }
+    </span>
+    <br />
+    @if (ViewBag.Article != null)
+    {
+        @Html.Partial("_ArticleTitle", (ArticleModel)ViewBag.Article)
+    }
+    @if (ViewBag.Job != null)
+    {
+        @Html.Raw(" | Trong: ")
+        @Html.Partial("_Job", (JobModel)ViewBag.Job)
+    }
+    <p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Ajax.ActionLink("Trả lời", "AddAnswer", "Questions", new { id = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "AjaxUpdate",
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get"
+                 }, null)
+            @Html.Raw(" | ")
+            @Html.ActionLink("Edit", "Edit", "Questions", new { id = Model.Id }, null)
+            @Html.Raw(" | ")
+            @Html.ActionLink("Back to List", "Index", "Questions")
+        }
+    </p>
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+    {
+        @Ajax.ActionLink("Tất cả bài giải", "GetAnswers", "Questions", new { questionId = Model.Id },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "AjaxUpdate",
+                     InsertionMode = InsertionMode.Replace,
+                     HttpMethod = "Get"
+                 }, null)
+    }
+    <p>
+        @Html.Raw(Model.Content)
+    </p>
+</div>
+<div class="col-md-8">
+    <div id="AjaxUpdate"></div>
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Bài giải (@Model.Answers.Count())
+                </h4>
+                <span>
+                    Có (@Model.Answers.Where(t => t.IsCorrect).Count()) câu trả lời đúng
+                    | Có (@Model.Answers.Where(t => t.IsCorrect != true).Count()) câu trả lời sai.
+                </span>
+            </div>
+            <div class="panel-body">
+                @if (Model.Answers != null)
+                {
+                    <h4>
+                        Trả lời đúng:
+                    </h4>
+                    @Html.Partial("_Answers", Model.Answers)
+                }
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Xem thêm", "GetAnswers", "Questions", new { questionId = Model.Id }, null)
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.CrawlerModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="style1">
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.Name, "Details", "JobModels", new { id = item.Id }, null)<br />
+                <span>
+                    @*@Html.Raw("Last run: " + item.LastestRun.Value) 
+                    @Html.Raw(" | ")*@
+                    @Html.Raw("Độ sâu: " + item.Depth)
+                    @Html.Raw(" | Số lượng: ")
+                </span>
+                <p>
+                    @Html.Raw(item.Description)
+                </p>
+            </li>
+        }
+    </ul>
+}
+
+

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.AnswerModel>
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @if (!item.Name.IsNullOrEmptyOrWhiteSpace())
+            {
+                @Html.ActionLink(item.Name, "Details", "Answers", new { id = item.Id }, null)
+                <br />
+            }
+            @if (item.Reviews == null || (item.Reviews != null && item.Reviews.Count()<=0))
+            {
+                @Html.Raw("Chưa review.")
+                @Html.Raw("Hãy ")
+                @Html.ActionLink("Review", "AddReview", "Answers", new { answerId = item.Id }, null)
+            }
+            else
+            {
+                if (item.IsCorrect)
+                {
+                    <p class="glyphicon">
+                        [Đúng]
+                    </p>
+                }
+                else
+                {
+                    <p class="text-danger">
+                        [Sai]
+                    </p>
+                }
+            }
+            
+            <span>
+                @Html.Raw("Giải bởi: " + item.CreatedBy)
+                @Html.Raw(" | ")
+                @Html.Raw(" lúc " + item.CreatedDate.ToShortDateString())
+                @if (item.LastUpdatedDate.HasValue)
+                {
+                    @Html.Raw(" | Cập nhật bởi: " + item.LastUpdatedBy) @Html.Raw(" lúc: " + item.LastUpdatedDate.Value)
+                }
+            </span>
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <br />
+                @Html.ActionLink("Edit", "Edit", "Answers", new { id = item.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "Answers", new { id = item.Id }, null)
+            }
+        </li>
+    }
+</ul>

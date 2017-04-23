@@ -1,0 +1,104 @@
+﻿@model Mvc5.CafeT.vn.Models.CrawlerModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CrawlerModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathConfig)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathConfig)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathOutput)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathOutput)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AcceptKeywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcceptKeywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RejectKeywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RejectKeywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastestRun)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastestRun)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

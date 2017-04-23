@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.AnswerModel>
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.QuestionId)
+            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+            @Html.DisplayFor(modelItem => item.IsCorrect)
+            <p>
+                @Html.Raw(item.Content)
+            </p>
+            
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) @Html.Raw(" | ")
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </p>
+            }
+        </li>
+    }
+</ul>

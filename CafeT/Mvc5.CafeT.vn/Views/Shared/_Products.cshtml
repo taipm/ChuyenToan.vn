@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ProductModel>
+
+
+<ul class="style2">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.Name, "Details", "Products", new { id = item.Id }, null)
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <br />
+                @Html.ActionLink("Edit", "Edit", "Products", new { id = item.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "Products", new { id = item.Id }, null)
+            }
+        </li>
+    }
+</ul>
+

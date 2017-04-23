@@ -1,0 +1,152 @@
+﻿@using Mvc5.CafeT.vn.ModelViews
+@using Mvc5.CafeT.vn.Models
+
+@model ArticleView
+
+@{
+    ViewBag.Title = Model.Title;
+    string avatarUrl = "/Assets/Customizes/images/avatar_default.png";
+    if(!string.IsNullOrEmpty(Model.ImageAuthor))
+    {
+        avatarUrl = Model.ImageAuthor;
+    }
+}
+
+<div class="row single-wrapper">
+    <div class="col-md-12 col-sm-12 col-xs-12 m22 single-post">
+        <div class="widget">
+            <div class="large-widget m10">
+                <div class="post clearfix">
+                    <div class="title-area">
+                        <div class="colorfulcats">
+                            @*<a href="javascript:void(0);"><span class="label label-primary">Mới</span></a>
+                            <a href="javascript:void(0);"><span class="label label-warning">Nổi bật</span></a>*@
+                        </div>
+                        <h3>@Model.Title</h3>
+                        <div class="large-post-meta">
+                            <span class="avatar"><img src="@avatarUrl" alt="" class="img-circle"> @Html.ActionLink(@Model.Author.GetFullName(), "Details", "ApplicationUsers", new { userName = @Model.Author.Email }, htmlAttributes: new { title = "Thông tin thành viên" })</span>
+                            <small>&#124;</small>
+                            <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</a></span>
+                            <small class="">&#124;</small>
+                            <span class=""><a href="#comments"><i class="fa fa-comments-o"></i> @Model.Comments.Count</a></span>
+                            <small class="">&#124;</small>
+                            <span class=""><a href="javascript:void(0);"><i class="fa fa-eye"></i> @Model.CountViews</a></span>
+                            <small>&#124;</small>
+                            <span><a href="javascript:void(0);"><i class="fa fa-file"></i> @Model.Files.Count</a></span>
+                            <small class="">&#124;</small>
+                            <span class="">Số từ: @Model.Content.ToSmartText().Words.Count()</span>
+                            <small class="">&#124;</small>
+                            <span class="">Links: @Model.Content.ToSmartText().Urls.Count()</span>
+                            <small class="">&#124;</small>
+                            <span class="">Emails: @Model.Content.ToSmartText().Emails.Count()</span>
+                            <small class="">&#124;</small>
+                            <span class="">YouTube: @Model.Content.ToSmartText().YouTubeUrls.Count()</span>
+                            <small class="">&#124;</small>
+                            <span class="">Điểm: @Model.Points</span>
+                            <small class="">&#124;</small>
+                            <span class="">$Latex$: @Model.Content.ToSmartText().Latexs.Count()</span>
+                            @if (Model.CreatedBy == User.Identity.Name)
+                            {
+                                <small class="">&#124;</small>
+                                <span class=""><a href="/chinh-sua-bai-viet/@Model.Id"><i class="fa fa-edit"></i> Chỉnh sửa</a></span>
+                            }
+                        </div><!-- end meta -->
+                        <div class="post-sharing">
+                            <ul class="list-inline">
+                                <li style="text-align: center; align-items: center; vertical-align: central;">
+                                    <div class="fb-share-button"
+                                         data-layout="button_count"
+                                         data-href="http://chuyentoan.vn/bai-viet/@Model.Id">
+                                    </div>
+                                </li>
+                                <li style="text-align: center; align-items: center; vertical-align: central;">
+                                    <g:plusone annotation="inline"></g:plusone>
+                                </li>
+                            </ul>
+                        </div><!-- end post-sharing -->
+                    </div><!-- /.pull-right -->
+                </div><!-- end post -->
+                <div class="post-desc">
+                    @Html.Raw(Model.Content)
+                </div><!-- end post-desc -->
+                @if (Model.Files != null && Model.Files.Count > 0)
+                {
+                    <div class="post-bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tags">
+                                    <h4>Tài liệu đính kèm</h4>
+                                    @Html.Partial("_Files", Model.Files)
+                                </div><!-- end tags -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div>
+                }
+                <div class="post-bottom">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tags">
+                                <h4>Tags</h4>
+                                @foreach (var item in Model.Tags.Split(','))
+                                {
+                                    <a href="javascript:void(0);">@item.ToString()</a>
+                                }
+                            </div><!-- end tags -->
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end bottom -->
+                <div class="authorbox">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="post clearfix">
+                                <div class="avatar-author">
+                                    <a href="javascript:void(0);">
+                                        <img alt="" src="@avatarUrl" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="author-title desc">
+                                    <a>@Html.ActionLink(@Model.Author.GetFullName(), "Details", "ApplicationUsers", new { userName = @Model.Author.Email }, htmlAttributes: new { title = "Thông tin thành viên" })</a>
+                                    <a class="authorlink">@Html.ActionLink("Tổng điểm: " + Model.Author.Points, "Details", "ApplicationUsers", new { userName = @Model.Author.Email }, htmlAttributes: new { title = "Thông tin thành viên", @class="authorlink" })</a>
+                                    <p>@Html.Raw(Model.Author.About)</p>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end authorbox -->
+                <div class="row m22 related-posts">
+                    <div class="col-md-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Bài viết liên quan <span><a href="/bai-viet">Xem tất cả</a></span></h4>
+                                <hr>
+                            </div><!-- end widget-title -->
+                            <div class="review-posts row m30">
+                                @Html.Partial("_Articles-Box", (IEnumerable<ArticleView>)ViewBag.RelatedArticles)
+                            </div><!-- end review-post -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <div id="comments" class="row">
+                    <div class="col-md-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Bình luận về bài viết.. (@Model.Comments.Count)</h4>
+                                <hr>
+                            </div><!-- end widget-title -->
+                            <div class="comments">
+                                <div class="well">
+                                    @Html.Partial("_Articles-Comment", Model.Comments)
+                                </div><!-- end well -->
+                            </div><!-- end collapse -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Partial("_AddComment", new CommentView() { ArticleId = Model.Id })                        
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end large-widget -->
+        </div><!-- end widget -->
+    </div><!-- end col -->
+</div>

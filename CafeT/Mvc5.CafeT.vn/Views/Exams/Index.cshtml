@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ExamModel>
+
+@using Mvc5.CafeT.vn.Models
+
+
+@{
+    ViewBag.Title = "CafeT.vn - Exams";
+}
+
+<div class="col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Tìm kiếm
+        </div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Index", "Exams",
+                                new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+            {
+                @Html.TextBox("SearchString", null, new { id = "Search" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+            }
+        </div>
+        <div class="panel-footer">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <input type="file" id="uploadFile" name="file" />  <a href="#" id="btnUpload" class="btn btn-primary">Upload file</a>
+            }
+        </div>
+    </div>
+    <section>
+        <div class="panel-heading">
+            <h4>Exams</h4>
+            <span>Các kỳ thi của CafeT.vn</span>
+        </div>
+        <div class="panel-body">
+            <ul class="style1">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <h4>
+                            @Html.ActionLink(item.Name, "Details", "Exams", new { id = item.Id }, null)
+                        </h4>
+                        <span>
+                            @item.CreatedBy on @item.CreatedDate.ToShortDateString()
+                            @if (item.Questions != null && item.Questions.Count() > 0)
+                            {
+                                @Html.Raw(" | ") @Html.Raw("Questions: " + item.Questions.Count())
+                            }
+                        </span>
+                        <br />
+                        @Html.Raw(item.Description)
+                        <br />
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Exams", new { id = item.Id }, null)
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", "Exams", new { id = item.Id }, null)
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="panel-footer">
+            @*@if (User.Identity.IsAuthenticated)
+            {
+                <input type="file" id="uploadFile" name="file" />  <a href="#" id="btnUpload" class="btn btn-primary">Upload file</a>
+            }*@
+        </div>
+    </section>
+
+</div>
+<div class="col-md-3">
+    <section class="sidebar">
+        <header>
+            <h4>Nhiều bạn tham gia</h4>
+        </header>
+        <ul class="style1">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                    <br />
+                    <span>
+                        @item.CreatedBy on @item.CreatedDate.ToShortDateString()
+                        @if (item.Questions != null && item.Questions.Count() > 0)
+                        {
+                            @Html.Raw(" | ") @Html.Raw("Questions: " + item.Questions.Count())
+                        }
+                    </span>
+                    <br />
+                    @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Exams", new { id = item.Id }, null)
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Delete", "Delete", "Exams", new { id = item.Id }, null)
+                    }
+                </li>
+            }
+        </ul>
+    </section>
+</div>
+<div class="col-md-3">
+    <section class="sidebar">
+        <header>
+            <h4>Feugiat Tempus</h4>
+        </header>
+        <ul class="style1">
+            <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+            <li><a href="#">Etiam rhoncus volutpat erat</a></li>
+            <li><a href="#">Donec dictum metus in sapien</a></li>
+            <li><a href="#">Nulla luctus eleifend purus</a></li>
+            <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+        </ul>
+    </section>
+    <section class="sidebar">
+        <header>
+            <h4>Files</h4>
+        </header>
+        <ul class="style1">
+            <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+            <li><a href="#">Etiam rhoncus volutpat erat</a></li>
+            <li><a href="#">Donec dictum metus in sapien</a></li>
+            <li><a href="#">Nulla luctus eleifend purus</a></li>
+            <li><a href="#">Maecenas luctus lectus at sapien</a></li>
+        </ul>
+    </section>
+</div>

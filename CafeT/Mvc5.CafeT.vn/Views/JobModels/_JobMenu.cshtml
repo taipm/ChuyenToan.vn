@@ -1,0 +1,17 @@
+﻿@model Mvc5.CafeT.vn.Models.JobModel
+
+<ul class="style1">
+    <li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Thêm câu hỏi", "AddQuestion", "JobModels", new { jobId = Model.Id }, null)
+            @Html.Raw("|")  
+        }
+        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+        {
+            @Html.ActionLink("Edit", "Edit", "JobModels", new { id = Model.Id }, null)
+            @Html.Raw("|")
+        }
+        @Html.ActionLink("Back to List", "Index", "JobModels")
+    </li>
+</ul>

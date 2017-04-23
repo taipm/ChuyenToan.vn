@@ -1,0 +1,128 @@
+﻿@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.FileModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#btnUpload').click(function () {
+                UploadFile($('#uploadFile')[0].files);
+            }
+            )
+
+        });
+
+        function UploadFileChunk(Chunk, FileName) {
+            var FD = new FormData();
+            FD.append('file', Chunk, FileName);
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("UploadFileWithSplitsForFile", "FileModels", new { fileId = Model.Id}, null)",
+                contentType: false,
+                processData: false,
+                data: FD
+            });
+        }
+
+        function UploadFile(TargetFile) {
+            // create array to store the buffer chunks
+            var FileChunk = [];
+            // the file object itself that we will work with
+            var file = TargetFile[0];
+            // set up other initial vars
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * (1024 * 1024);
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = file.name + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                UploadFileChunk(chunk, FilePartName);
+            }
+        }
+    </script>
+}
+<div class="col-md-6">
+    @if (!Model.Title.IsNullOrEmptyOrWhiteSpace())
+    {
+        <h4>@Html.ActionLink(Model.Title, "Download", "FileModels", new { id = Model.Id }, null)</h4>
+    }
+    else
+    {
+        @Html.ActionLink(Model.FileName, "Download", "FileModels", new { id = Model.Id }, null)
+    }
+    <br />
+    <span>
+        @Html.Partial("_FileInfo", Model)
+    </span>
+    <p>
+        @Html.Raw(Model.Description)
+    </p>
+    @if (Model.IsExits(Server.MapPath("~/" + Model.FullPath)))
+    {
+        <p>
+
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+            {
+                @Html.ActionLink("Edit", "Edit", "FileModels", new { id = Model.Id }, null)
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
+            }
+        </p>
+    }
+    else
+    {
+        <p class="panel-info">
+            This file is not exits on your storage, pls check and update this file.
+        </p>
+        <div class="panel-footer">
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+            {
+                <input type="file" id="uploadFile" name="file" />
+                <a href="#" id="btnUpload" class="btn btn-primary">Upload</a>
+            }
+        </div>
+        if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+        {
+            @Html.ActionLink("Delete", "Delete", "FileModels", new { id = Model.Id }, null)
+        }
+    }
+</div>
+<div class="col-md-6">
+    @if (ViewBag.News != null)
+    {
+        @Html.Partial("_Files", (IEnumerable<FileModel>)ViewBag.NewFiles)
+    }
+    @if (ViewBag.TopDownloads != null)
+    {
+        @Html.Partial("_Files", (IEnumerable<FileModel>)ViewBag.TopDownloads)
+    }
+    @if (ViewBag.Related != null)
+    {
+        @Html.Partial("_Files", (IEnumerable<FileModel>)ViewBag.Related)
+    }
+</div>
+
+

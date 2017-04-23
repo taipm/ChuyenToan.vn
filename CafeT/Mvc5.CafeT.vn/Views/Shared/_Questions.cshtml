@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.QuestionModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="style1">
+        @foreach (var item in Model)
+        {
+            if (item.IsVerified)
+            {
+                <li>
+                    @if (!item.Title.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(item.Title, "Details", "Questions", new { id = item.Id }, null)
+                    }
+                    <br />
+                    <span>
+                        @Html.Partial("_QuestionInfo", item)
+                    </span>
+
+                    @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                    {
+                        <br />
+                        @Html.ActionLink("Trả lời", "AddAnswer", "Questions", new { id = item.Id }, null)
+                        if (User.Identity.Name == item.CreatedBy)
+                        {
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Edit", "Edit", "Questions", new { id = item.Id }, null)
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", "Questions", new { id = item.Id }, null)
+                        }
+                    }
+                </li>
+            }
+        }
+    </ul>
+}
+

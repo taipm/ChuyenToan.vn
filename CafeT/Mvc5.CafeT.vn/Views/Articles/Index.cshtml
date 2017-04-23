@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.ModelViews.ArticleView>
+@using PagedList.Mvc;
+@using Mvc5.CafeT.vn.Models;
+
+@{
+    ViewBag.Title = "Bài viết";
+}
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Bài viết</h4>
+            <hr>
+        </div>
+        <div class="post-pager">
+            <form action="/bai-viet" method="get" role="form">
+                <div class="input-group margin">
+                    <input name="searchString" value="@ViewBag.Keyword" class="form-control" placeholder="Nhập từ khóa..." type="text">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Tìm!</button>
+                    </span>
+                </div>
+            </form>
+            <hr>
+            <div class="list-inline">
+                <h3>Điều kiện lọc</h3>
+                <div class="list-item">
+                    <a href="javascript:void(0);" class="btn btn-primary">Tất cả</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Toán cơ bản</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Toán lớp chuyên</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Ôn thi</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Đại số</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Hình học</a>
+                    <a href="javascript:void(0);" class="btn btn-default">LaTex</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Đạo hàm</a>
+                </div>
+            </div>
+            <hr>
+            <div class="list-inline">
+                <h3>Từ khóa: <span class="text-primary">"@ViewBag.Keyword"</span> có <span class="text-success">@ViewBag.CountArticles</span> bài viết</h3>
+            </div>
+        </div>
+        <div class="widget searchwidget indexslider">
+            @Html.Partial("_Articles-Items", Model)
+        </div>
+        <div class="pagination-wrapper">
+            Trang
+            @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            @Html.Raw(" / ")
+            @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Articles", new { page }, null))
+        </div>
+    </div><!-- end widget -->
+</div><!-- end col -->

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="col-md-4">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Products
+                </h4>
+                <span>Sản phẩm nổi bật của CafeT.vn</span>
+            </div>
+            <div class="panel-body">
+                <ul class="style1">
+                    @foreach (var item in Model.Where(t=>t.Price > 0))
+                    {
+                        <li>
+                            <h4>
+                                @Html.ActionLink(item.Name, "Details", "Products", new { id = item.Id }, null)
+                            </h4>
+                            <span>
+                                @*@Html.Partial("_ProductInfo", Model)*@
+                                @item.CreatedBy on @item.CreatedDate.ToShortDateString()
+                            </span>
+                            <br />
+                            @Html.Raw(item.Description)
+                            <br />
+                            @*<p>
+                                @Html.Partial("_ProductMenu", Model)
+                            </p>*@
+                            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                            {
+                                @Html.ActionLink("Edit", "Edit", "Projects", new { id = item.Id }, null)
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Delete", "Delete", "Projects", new { id = item.Id }, null)
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-4">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Miễn phí
+                </h4>
+                <span>Sản phẩm và tiện ích miễn phí của CafeT.vn</span>
+            </div>
+            <div class="panel-body">
+                <ul class="style1">
+                    @foreach (var item in Model.Where(t => t.Price <= 0))
+                    {
+                        <li>
+                            <h4>
+                                @Html.ActionLink(item.Name, "Details", "Products", new { id = item.Id }, null)
+                            </h4>
+                            <span>
+                                @item.CreatedBy on @item.CreatedDate.ToShortDateString()
+                            </span>
+                            <br />
+                            @if (!item.Description.IsNullOrEmptyOrWhiteSpace())
+                            {
+                                if (item.Description.GetCountWords() >= 100)
+                                {
+                                    @Html.Raw(item.Description.GetWord(100))
+                                }
+                            }
+
+                            <br />
+                            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                            {
+                                @Html.ActionLink("Edit", "Edit", "Projects", new { id = item.Id }, null)
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Delete", "Delete", "Projects", new { id = item.Id }, null)
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-4">
+    <section class="sidebar">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4>
+                    Khách hàng
+                </h4>
+                <span>Một số khách hàng tiêu biểu của CafeT.vn</span>
+            </div>
+            <div class="panel-body">
+                <ul class="style1">
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                            <br />
+                            <span>
+                                @item.CreatedBy on @item.CreatedDate.ToShortDateString()
+                            </span>
+                            <br />
+                            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                @Html.Raw(" | ")
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            }
+                        </li>
+                    }
+                </ul>
+                
+            </div>
+            <div class="panel-footer">
+                @*@Html.Partial("_Customers", ViewBag.Customers)*@
+            </div>
+        </div>
+    </section>
+</div>

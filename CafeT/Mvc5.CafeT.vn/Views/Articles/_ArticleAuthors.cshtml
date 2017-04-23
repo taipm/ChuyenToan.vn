@@ -1,0 +1,98 @@
+﻿@model Mvc5.CafeT.vn.Models.ApplicationUser
+
+<section class="sidebar">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            @if (Model!= null)
+            {
+                @Html.ActionLink(Model.LastName + " " + Model.FirstName, "Details", "ApplicationUsers", new { userName = Model.UserName }, null)             
+            }
+
+        </div>
+        <div class="panel-body">
+            <div class="col-md-3">
+                @if (@Model.AvatarPath != null)
+                {
+                    <img src="@Model.AvatarPath" />
+                }
+            </div>
+            <div class="col-md-9">
+                <p>
+                    @Html.Raw(Model.About)
+                </p>
+            </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</section>
+
+
+@*<div>
+    <h4>ApplicationUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvatarPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvatarPath)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.About)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

@@ -1,0 +1,20 @@
+﻿@model Mvc5.CafeT.vn.Models.CuriculumModel
+
+<div>
+    <h4>CuriculumModel</h4>
+    <hr />
+    @Html.DisplayFor(model => model.UserId)
+    <p>
+        @Html.Raw(Model.Content)
+    </p>
+    
+    @Html.Raw("Đã xem: " + Model.CountViews)
+</div>
+@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatedBy)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Curiculums", new { id = Model.Id },null) |
+        @Html.ActionLink("Back to List", "Index", "Curiculums")
+    </p>
+}
+

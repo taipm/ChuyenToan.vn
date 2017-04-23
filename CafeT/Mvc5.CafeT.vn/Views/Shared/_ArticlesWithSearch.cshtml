@@ -1,0 +1,27 @@
+﻿@model PagedList.IPagedList<Mvc5.CafeT.vn.ModelViews.ArticleView>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            @if (item.Author != null)
+            {
+                <img src="@item.Author.AvatarPath" />
+            }
+            
+            <h4>
+                @Html.ActionLink(item.Title, "Details", "Articles", new { id = item.Id }, null)
+            </h4>
+            @Html.Raw(item.Summary)
+            <br />
+            @Html.Raw("Comments: " + item.Comments.Count)
+        </li>
+    }
+</ul>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

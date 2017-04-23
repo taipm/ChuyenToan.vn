@@ -1,0 +1,83 @@
+﻿@using Mvc5.CafeT.vn.Models;
+@model Mvc5.CafeT.vn.Models.QuestionModel
+
+<div class="col-md-4">
+    <h4>@Html.Raw(Model.Title)</h4>
+    <hr />
+    <div class="float-left">
+        <h2 id="countdown"></h2>
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dd>
+            @Html.Raw(Model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+        @if (Model.LastUpdatedDate.HasValue)
+        {
+            @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+        }
+        @if (ViewBag.Article != null)
+        {
+            @Html.Partial("_ArticleTitle", (ArticleModel)ViewBag.Article)
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+    </dl>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Ajax.ActionLink("Add answer", "AddAnswer", "Questions", new { id = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)
+        @*@Html.Raw(" | ")
+            @Ajax.ActionLink("Articles (" + Model.Answers.Count + ")", "GetAnswers", "Questions", new { id = Model.Id },
+            new AjaxOptions
+            {
+                UpdateTargetId = "AjaxUpdate",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "Get"
+            }, null)*@
+        @*@Html.Raw(" | ")
+            @Ajax.ActionLink("Add Answer", "DoExercise", "Questions", new { id = Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "AjaxUpdate",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Get"
+                }, null)*@
+        @*@Html.Partial("_UserCreateAnswer", (AnswerModel)ViewBag.AnswerCreate)*@
+        <p>
+            @Html.ActionLink("Edit", "Edit", "Questions", new { id = Model.Id }, null) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+</div>
+<div class="col-md-8">
+    @if (Model.Answers != null)
+    {
+        @Html.Partial("_Answers", Model.Answers)
+    }
+    
+</div>
+
+<div id="AjaxUpdate"></div>
+

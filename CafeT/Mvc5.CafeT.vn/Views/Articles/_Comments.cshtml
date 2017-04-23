@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.CommentModel>
+
+
+<ul class="style1">
+    @foreach (var item in Model)
+    {
+        <li>
+            <h4>
+                @Html.Raw(item.Title)
+            </h4>
+            <span>
+                @Html.Raw("Created: " + item.CreatedDate) @Html.Raw(" By: " + item.CreatedBy)
+                @if (item.LastUpdatedDate.HasValue)
+                {
+                    @Html.Raw(" | Cập nhật: " + item.LastUpdatedBy)
+                    @Html.Raw(" lúc: " + item.LastUpdatedDate)
+                }
+
+                | @Html.Raw("Vews: " + item.CountViews)
+            </span>
+            <p>
+                @Html.Raw(item.Content)
+            </p>
+            
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == item.CreatedBy)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id }, null)
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Details", "Details", "Comments", new { id = item.Id }, null)
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null)
+                </p>
+            }
+        </li>
+    }
+</ul>
+

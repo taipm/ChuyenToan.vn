@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.FileModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string imageUrl = "/Assets/Customizes/images/ebook_default.jpg";
+        if(!string.IsNullOrWhiteSpace(item.AvatarPath))
+        {
+            imageUrl = item.AvatarPath;
+        }
+        string title = item.Title;
+        if(title != null)
+        {
+            if(title.Length > 20)
+            {
+                title = title.Substring(0, 20) + " ...";
+            }
+        }
+
+        <div class="post-review col-md-3 col-sm-12 col-xs-12" style="min-height: 300px;">
+            <div class="post-media entry">
+                <a href="/chi-tiet-tai-lieu/@item.Id.ToString()"><img src="@imageUrl" alt="" class="img-responsive" /></a>
+            </div><!-- end media -->
+            <div class="large-post-meta">
+                <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy")</a></span>
+                <small>&#124;</small>
+                <span><a href="javascript:void(0);"><i class="fa fa-download"></i> @item.CountDownloads</a></span>
+                <small>&#124;</small>
+                <span><a href="javascript:void(0);"><i class="fa fa-eye"></i> @item.CountViews</a></span>
+            </div><!-- end meta -->
+            <div class="post-title">
+                <h3><a title="@item.Title" href="/chi-tiet-tai-lieu/@item.Id.ToString()">@title</a></h3>
+            </div><!-- end post-title -->
+        </div><!-- end post-review -->
+    }
+}

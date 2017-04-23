@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.ArticleView>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string avatarUrl = "/Assets/Customizes/images/avatar_default.png";
+        if (!string.IsNullOrEmpty(item.ImageAuthor))
+        {
+            avatarUrl = item.ImageAuthor;
+        }
+        string imageUrl = "/Assets/Customizes/images/article_default.jpg";
+        if (!string.IsNullOrWhiteSpace(item.AvatarPath))
+        {
+            imageUrl = item.AvatarPath;
+        }
+        string title = item.Title;
+        if (title != null)
+        {
+            if (title.Length > 100)
+            {
+                title = title.Substring(0, 100) + " ...";
+            }
+        }
+        string description = item.Summary;
+        if (description != null)
+        {
+            if (description.Length > 200)
+            {
+                description = description.Substring(0, 200) + " ...";
+            }
+        }
+
+        <div class="large-widget m30">
+            <div class="post row clearfix">
+                <div class="col-md-5">
+                    <div class="post-media">
+                        <a href="/Articles/Details/@item.Id">
+                            <img alt="" src="@imageUrl" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="title-area">
+                        @*<div class="colorfulcats">
+                            <a href="javascript:void(0);"><span class="label label-primary">Mới</span></a>
+                            <a href="javascript:void(0);"><span class="label label-warning">Nổi bật</span></a>
+                        </div>*@
+                        <h3><a href="/Articles/Details/@item.Id">@title</a></h3>
+                        <div class="large-post-meta">
+                            <span class="avatar"><a href="javascript:void(0);"><img src="@avatarUrl" alt="" class="img-circle"> @Html.ActionLink(@item.Author.GetFullName(), "Details", "ApplicationUsers", new { userName = @item.Author.UserName }, htmlAttributes: new { title = "Thông tin thành viên" })</a></span>
+                            <small>&#124;</small>
+                            <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</a></span>
+                            <small class="hidden-xs">&#124;</small>
+                            <span class="hidden-xs"><a href="#comments"><i class="fa fa-comments-o"></i> @item.Comments.Count</a></span>
+                            <small class="hidden-xs">&#124;</small>
+                            <span class="hidden-xs"><a href="javascript:void(0);"><i class="fa fa-eye"></i> @item.CountViews</a></span>
+                        </div>
+                        <div class="post-desc">
+                            <p>@description</p>
+                        </div>
+                        <!-- end meta -->
+                    </div>
+                    <!-- /.pull-right -->
+                </div>
+            </div>
+            <!-- end post -->
+        </div>
+    }
+}

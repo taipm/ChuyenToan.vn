@@ -1,0 +1,31 @@
+﻿@model IEnumerable<string>
+
+<div class="span3 bs-docs-sidebar">
+    <ul class="nav nav-list bs-docs-sidenav affix" style="top: 200px;">
+        @foreach (string model in Model)
+        {
+            if (model != null && model.Length>0)
+            {
+                <li>
+                    @*@Html.Raw(model)*@
+                    @Html.ActionLink(model, "Index")
+                </li>
+            }
+
+        }
+        @*<li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-user"></i>dany
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a id="logout" href="#">Sign Out</a></li>
+            </ul>
+        </li>*@
+    </ul>
+
+    @*<ul class="nav nav-list bs-docs-sidenav affix">
+        <li><a href="#approval" id="approval"></i>Approval Requests</a></li>
+        <li><a href="#setting" id="setting"></i>Settings</a></li>
+    </ul>*@
+</div>

@@ -1,0 +1,56 @@
+﻿
+@model PagedList.IPagedList<Mvc5.CafeT.vn.Models.UrlModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet"
+      type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@using (Ajax.BeginForm("Index", "Urls",
+                        new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults" }))
+{
+    <h3>Search:</h3>
+        @Html.TextBox("searchString", null, new { id = "Search" })
+        <input type="submit" value="Search" class="btn btn-primary" />
+}
+
+<div id="searchResults">
+    <table class="table">
+        <tr>
+
+            <th>
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Urls", new { id = item.Id }, null) |
+                    @Html.ActionLink("Details", "Details", "Urls", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Urls", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

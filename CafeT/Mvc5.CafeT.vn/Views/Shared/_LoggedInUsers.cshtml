@@ -1,0 +1,18 @@
+﻿@if (HttpRuntime.Cache["LoggedInUsers"] != null)
+{
+    var loggedOnUsers = HttpRuntime.Cache["LoggedInUsers"] as Dictionary<string, DateTime>;
+
+    if (loggedOnUsers != null)
+    {
+        <div class="LoggedInUserBox">
+            <span> Online Users: </span>
+            @foreach (var item in loggedOnUsers)
+            {
+                @Html.Raw(@item.Key.ToString() + " | Value: " + item.Value.ToString());
+                
+                @*<a href="/Users/Panel/UserProfile/@item.Key">@item.Key</a>*@
+                @:&nbsp;
+            }
+        </div>
+    }
+}

@@ -1,0 +1,31 @@
+﻿
+@using Mvc5.CafeT.vn.Models
+@model Mvc5.CafeT.vn.Models.FileModel
+
+<span>
+    @if (Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+    }
+    else
+    {
+        @Html.Raw(Model.CreatedDate.ToShortDateString())
+    }
+    @*@Html.Raw(Model.CreatedDate.ToShortDateString())
+    @Html.Raw(" | ")
+    @Html.Raw(Model.CreatedBy)
+    
+    @if (Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(" | Update on: ")
+        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+        @Html.Raw(" | By: ")
+        @Html.Raw(Model.LastUpdatedBy)
+    }*@
+    
+    @Html.Raw(" | Tải: ")
+    @Html.Raw(Model.CountDownloads)
+    @Html.Raw(" | Đã xem: ")
+    @Html.Raw(Model.CountViews)
+    @Html.Raw(" | " + Model.SizeToString)
+</span>

@@ -1,0 +1,28 @@
+﻿<div class="widget">
+    <div class="widget-title">
+        <h4>Tài khoản</h4>
+        <hr>
+    </div><!-- end widget-title -->
+    <div class="mini-widget carrier-widget m30" style="text-align: center">
+        @RenderPage("~/Views/Shared/_LoginPartial.cshtml")
+    </div><!-- end social -->
+</div>
+@RenderPage("~/Views/Shared/Templates/_Left-PageFacebook.cshtml")
+<div class="widget">
+    <div class="widget-title">
+        <h4>Tuyển dụng <span><a href="/tuyen-dung">Xem tất cả (@ViewBag.CountJobs)</a></span></h4>
+        <hr>
+    </div><!-- end widget-title -->
+    <div class="mini-widget carrier-widget m30">
+        <div id="jobs-box"></div>
+    </div><!-- end mini-widget -->    
+</div><!-- end widget -->
+<div class="widget">
+    <div class="widget-title">
+        <h4>Bình luận mới <span><a href="/Comments">Xem tất cả (@ViewBag.CountComments)</a></span></h4>
+        <hr>
+    </div><!-- end widget-title -->    
+    <div class="mini-widget carrier-widget m30">
+        <div id="comments-box"></div>
+    </div><!-- end mini-widget -->
+</div><!-- end widget -->

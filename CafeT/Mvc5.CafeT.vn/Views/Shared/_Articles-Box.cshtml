@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.ModelViews.ArticleView>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        string avatarUrl = "/Assets/Customizes/images/avatar_default.png";
+        if (!string.IsNullOrEmpty(item.ImageAuthor))
+        {
+            avatarUrl = item.ImageAuthor;
+        }
+        string imageUrl = "/Assets/Customizes/images/article_default.jpg";
+        if (!string.IsNullOrWhiteSpace(item.AvatarPath))
+        {
+            imageUrl = item.AvatarPath;
+        }
+        string title = item.Title;
+        if (title != null)
+        {
+            if (title.Length > 80)
+            {
+                title = title.Substring(0, 80) + " ...";
+            }
+        }
+        string description = item.Summary;
+        if (description != null)
+        {
+            if (description.Length > 60)
+            {
+                description = description.Substring(0, 60) + " ...";
+            }
+        }
+
+        <div class="post-review col-md-3 col-sm-12 col-xs-12" style="min-height: 300px;">
+            <div class="post-media entry">
+                <img src="@imageUrl" alt="" class="img-responsive">
+                <div class="magnifier">
+                    <div class="hover-title-left">
+                        <span><a href="/Articles/Details/@item.Id" title=""><i class="fa fa-folder-open"></i> Bài viết</a></span>
+                    </div><!-- end title -->
+                    <div class="hover-title">
+                        <span><a href="javascript:void(0);" title=""><i class="fa fa-comments-o"></i> @item.Comments.Count bình luận</a></span>
+                    </div><!-- end title -->
+                </div><!-- end magnifier -->
+            </div><!-- end media -->            
+            <div class="large-post-meta">
+                <span class="avatar"><a href="javascript:void(0);"><img src="@avatarUrl" alt="" class="img-circle"> @Html.ActionLink(@item.Author.GetFullName(), "Details", "ApplicationUsers", new { userName  = @item.Author.UserName }, htmlAttributes: new { title = "Thông tin thành viên" })</a></span>
+                <br />
+                <span><a href="javascript:void(0);"><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy")</a></span>
+                <small>&#124;</small>
+                <span><a href="javascript:void(0);"><i class="fa fa-comments-o"></i> @item.Comments.Count</a></span>
+                <small>&#124;</small>
+                <span><a href="javascript:void(0);"><i class="fa fa-eye"></i> @item.CountViews</a></span>
+                <small>&#124;</small>
+                <span><a href="javascript:void(0);"><i class="fa fa-file"></i> @item.Files.Count</a></span>
+            </div><!-- end meta --> 
+            <div class="post-title">
+                <h3>
+                    <a title="@item.Title" href="/Articles/Details/@item.Id.ToString()">@title</a>
+                    @if (item.IsNews())
+                    {
+                        <span class="label label-danger"> (Mới)</span>
+                    }
+                    @*@if (item.IsUpdated())
+                    {
+                        <span class="label label-danger"> (Cập nhật)</span>
+                    }*@
+                </h3>
+            </div><!-- end post-title -->           
+        </div><!-- end post-review -->
+    }
+}

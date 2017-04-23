@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Mvc5.CafeT.vn.Models.FileModel>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="style1">
+        @foreach (var item in Model)
+        {
+            if (!item.IsImage())
+            {
+                <li>
+                    @if (!item.Title.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(item.Title, "Details", "FileModels", new { id = item.Id }, null)<br />
+                    }
+                    else if (!item.FileName.IsNullOrEmptyOrWhiteSpace())
+                    {
+                        @Html.ActionLink(item.FileName, "Details", "FileModels", new { id = item.Id }, null)<br />
+                    }
+                    @if (item.LastUpdatedDate.HasValue && item.LastUpdatedDate.Value.AddDays(3) >= DateTime.Now)
+                    {
+                        <span class="label label-danger">Mới</span>
+                    }
+                    else if (item.CreatedDate.AddDays(3) >= DateTime.Now)
+                    {
+                        <span class="label label-danger">Mới</span>
+                    }
+                    <span>
+                        @Html.Partial("_FileInfo", item)
+                    </span>
+                    <p>
+                        @Html.Partial("_FileMenu", item)
+                    </p>
+                </li>
+            }
+
+        }
+    </ul>
+}

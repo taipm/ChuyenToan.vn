@@ -1,0 +1,17 @@
+﻿@model Mvc5.CafeT.vn.ModelViews.ArticleView
+
+
+<span>
+    @Html.ActionLink(Model.Author.LastName + " " + Model.Author.FirstName,"Details","ApplicationUsers", new { userName = Model.Author.UserName}, null)
+    @if (Model.LastUpdatedDate.HasValue)
+    {
+        @Html.Raw(Model.LastUpdatedDate.Value.ToShortDateString())
+    }
+    else
+    {
+        @Html.Raw(Model.CreatedDate.ToShortDateString())
+    }
+
+    @Html.Raw(" | Đã xem: ")
+    @Html.Raw(Model.CountViews)
+</span>
