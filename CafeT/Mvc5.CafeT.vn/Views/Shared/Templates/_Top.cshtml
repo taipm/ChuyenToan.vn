@@ -1,8 +1,12 @@
-﻿<div class="logo-wrapper">
+﻿@{ 
+    string urlLogo = System.Configuration.ConfigurationManager.AppSettings["UrlLogo"];
+}
+
+<div class="logo-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-12">
-                <a class="navbar-brand" href="/"><img src="~/Assets/Customizes/images/chuyen-toan.png" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="@urlLogo" alt=""></a>
             </div>
             <!-- end col -->
             <div class="col-md-9 col-sm-12">

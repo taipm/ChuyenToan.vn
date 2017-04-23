@@ -1,13 +1,23 @@
-﻿<div class="left-menu hidden-sm hidden-md hidden-xs">
+﻿@{ 
+    string linkFacebook = System.Configuration.ConfigurationManager.AppSettings["LinkFacebook"];
+    string linkTwitter = System.Configuration.ConfigurationManager.AppSettings["LinkTwitter"];
+    string linkPinterest = System.Configuration.ConfigurationManager.AppSettings["LinkPinterest"];
+    string linkGooglePlus = System.Configuration.ConfigurationManager.AppSettings["LinkGooglePlus"];
+    string linkLinkedin = System.Configuration.ConfigurationManager.AppSettings["LinkLinkedin"];
+    string linkRSS = System.Configuration.ConfigurationManager.AppSettings["LinkRSS"];
+    string linkShare = System.Configuration.ConfigurationManager.AppSettings["LinkShare"];
+}
+
+<div class="left-menu hidden-sm hidden-md hidden-xs">
     <ul class="dm-social">
-        <li class="facebookbg"><a href="#" class="fa fa-facebook" data-toggle="tooltip" data-placement="right" title="Facebook">Facebook</a></li>
-        <li class="googlebg"><a href="#" class="fa fa-google-plus" data-toggle="tooltip" data-placement="right" title="Google+">Google+</a></li>
-        <li class="twitterbg"><a href="#" class="fa fa-twitter" data-toggle="tooltip" data-placement="right" title="Twitter">Twitter</a></li>
-        <li class="pinterestbg"><a href="#" class="fa fa-pinterest" data-toggle="tooltip" data-placement="right" title="Pinterest">Pinterest</a></li>
-        <li class="linkedinbg"><a href="#" class="fa fa-linkedin" data-toggle="tooltip" data-placement="right" title="Linkedin">Linkedin</a></li>
-        <li class="rssbg"><a href="#" class="fa fa-rss" data-toggle="tooltip" data-placement="right" title="RSS">RSS</a></li>
+        <li class="facebookbg"><a href="@linkFacebook" class="fa fa-facebook" data-toggle="tooltip" data-placement="right" title="Facebook">Facebook</a></li>
+        <li class="googlebg"><a href="@linkGooglePlus" class="fa fa-google-plus" data-toggle="tooltip" data-placement="right" title="Google+">Google+</a></li>
+        <li class="twitterbg"><a href="@linkTwitter" class="fa fa-twitter" data-toggle="tooltip" data-placement="right" title="Twitter">Twitter</a></li>
+        <li class="pinterestbg"><a href="@linkPinterest" class="fa fa-pinterest" data-toggle="tooltip" data-placement="right" title="Pinterest">Pinterest</a></li>
+        <li class="linkedinbg"><a href="@linkLinkedin" class="fa fa-linkedin" data-toggle="tooltip" data-placement="right" title="Linkedin">Linkedin</a></li>
+        <li class="rssbg"><a href="@linkRSS" class="fa fa-rss" data-toggle="tooltip" data-placement="right" title="RSS">RSS</a></li>
         <li class="share">
-            <a href="#" class="fa fa-share-alt" data-toggle="tooltip" data-placement="right" title="91k Share"></a>
+            <a href="@linkShare" class="fa fa-share-alt" data-toggle="tooltip" data-placement="right" title="91k Share"></a>
         </li>
     </ul>
 </div>

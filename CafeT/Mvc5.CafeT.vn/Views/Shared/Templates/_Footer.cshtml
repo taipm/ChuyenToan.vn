@@ -1,4 +1,19 @@
-﻿<footer class="footer">
+﻿@{ 
+    string linkFacebook = System.Configuration.ConfigurationManager.AppSettings["LinkFacebook"];
+    string linkTwitter = System.Configuration.ConfigurationManager.AppSettings["LinkTwitter"];
+    string linkPinterest = System.Configuration.ConfigurationManager.AppSettings["LinkPinterest"];
+    string linkGooglePlus = System.Configuration.ConfigurationManager.AppSettings["LinkGooglePlus"];
+    string linkVimeo = System.Configuration.ConfigurationManager.AppSettings["LinkVimeo"];
+    string linkYouTube = System.Configuration.ConfigurationManager.AppSettings["LinkYouTube"];
+    string linkMaxCDN = System.Configuration.ConfigurationManager.AppSettings["LinkMaxCDN"];
+
+    string addressLocation = System.Configuration.ConfigurationManager.AppSettings["AddressLocation"];
+    string year = System.Configuration.ConfigurationManager.AppSettings["Year"];
+    string founder = System.Configuration.ConfigurationManager.AppSettings["Founder"];
+    string websiteName = System.Configuration.ConfigurationManager.AppSettings["WebsiteName"];
+}
+
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-12 col-xs-12">
@@ -9,6 +24,7 @@
                     </div><!-- end widget-title -->
                     <div class="links-widget m30">
                         <ul class="check">
+                            <li><a href="http://chuyentoan.vn">ChuyenToan.vn</a></li>
                             <li><a href="http://chuyentin.vn">ChuyenTin.vn</a></li>
                             <li><a href="http://chuyenly.vn">ChuyenLy.vn</a></li>
                             <li><a href="http://chuyenHoa.vn">ChuyenHoa.vn</a></li>
@@ -46,13 +62,13 @@
                     </div><!-- end widget-title -->
                     <div class="links-widget m30">
                         <ul class="sociallinks">
-                            <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i> Pinterest</a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i> Google Plus</a></li>
-                            <li><a href="#"><i class="fa fa-vimeo"></i> Vimeo</a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i> YouTube</a></li>
-                            <li><a href="#"><i class="fa fa-maxcdn"></i> MaxCDN</a></li>
+                            <li><a href="@linkFacebook"><i class="fa fa-facebook"></i> Facebook</a></li>
+                            <li><a href="@linkTwitter"><i class="fa fa-twitter"></i> Twitter</a></li>
+                            <li><a href="@linkPinterest"><i class="fa fa-pinterest"></i> Pinterest</a></li>
+                            <li><a href="@linkGooglePlus"><i class="fa fa-google-plus"></i> Google Plus</a></li>
+                            <li><a href="@linkVimeo"><i class="fa fa-vimeo"></i> Vimeo</a></li>
+                            <li><a href="@linkYouTube"><i class="fa fa-youtube"></i> YouTube</a></li>
+                            <li><a href="@linkMaxCDN"><i class="fa fa-maxcdn"></i> MaxCDN</a></li>
                         </ul>
                     </div><!-- end links -->
                 </div><!-- end widget -->
@@ -86,8 +102,8 @@
     <div id="sitefooter" class="container">
         <div id="copyright" class="row">
             <div class="col-md-6 col-sm-12 text-left">
-                <p class="copyright-notice"><span class="fa fa-copyright"></span> 2017 ChuyenToan.vn - Founder <a href="#" title="TemplateVisual" target="_blank">Phan Minh Tài</a>.</p>
-                <p class="footer-links">Địa chỉ: Penta Coffee - 88 Lê Bình, Phường 4, Quận Tân Bình, TP. Hồ Chí Minh</p>
+                <p class="copyright-notice"><span class="fa fa-copyright"></span> @year @websiteName - Founder <a href="#" title="TemplateVisual" target="_blank">@founder</a>.</p>
+                <p class="footer-links">Địa chỉ: @addressLocation</p>
             </div>
             <div class="col-md-6 col-sm-12">
                 <ul class="list-inline text-right">
