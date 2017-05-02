@@ -1,5 +1,6 @@
 ﻿@{ 
     string linkFacebook = System.Configuration.ConfigurationManager.AppSettings["LinkFacebook"] + "/";
+    string websiteName = System.Configuration.ConfigurationManager.AppSettings["WebsiteName"];
 }
 
 <div class="widget">
@@ -16,7 +17,7 @@
              data-hide-cover="false" 
              data-show-facepile="true">
             <blockquote cite="@linkFacebook" class="fb-xfbml-parse-ignore">
-                <a href="@linkFacebook">ChuyenToan.vn</a>
+                <a href="@linkFacebook">@websiteName</a>
             </blockquote>
         </div>
     </div><!-- end social -->
